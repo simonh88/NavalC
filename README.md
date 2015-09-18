@@ -1,1 +1,2 @@
-jeu de bataille navale en C, opposan t un joueur à une IA
+jeu de bataille navale en C, opposant un joueur à une IA
+test
