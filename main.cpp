@@ -6,7 +6,7 @@
 int main()
 {
  
-    sf::RenderWindow window(sf::VideoMode(1900, 1080,32), "Formes");
+    sf::RenderWindow window(sf::VideoMode(1900, 1080), "Formes");
     sf::Font font;
     if (!font.loadFromFile("arial.ttf"))
     {
@@ -40,7 +40,7 @@ int main()
     carrer2.setFillColor(sf::Color::Green);
     carrer2.setOutlineColor(sf::Color::Red);
     carrer2.setOutlineThickness(1);
-    
+    int a = 0;
     sf::ConvexShape carrer3;
     carrer3.setPointCount(4);
     carrer3.setFillColor(sf::Color::Blue);
@@ -63,6 +63,7 @@ int main()
     carrer3.setPoint(2,sf::Vector2f(264,264));
     carrer3.setPoint(3,sf::Vector2f(200,264));
  
+    window.UseVerticalSync(true);
  
     while (window.isOpen()) // Boucle principal
     {
@@ -73,6 +74,8 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+	  a = a +1;
+	carrer3.setPoint(2,sf::Vector2f(a,264));
         window.clear(sf::Color::Black);
         window.draw(carrer1);
 	window.draw(carrer2);
