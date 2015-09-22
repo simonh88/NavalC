@@ -1,11 +1,33 @@
 #include <cstdlib>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
  
 int main()
 {
  
     sf::RenderWindow window(sf::VideoMode(1900, 1080,32), "Formes");
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf"))
+    {
+    // erreur...
+    }
+    sf::Text text;
+
+    // choix de la police à utiliser
+    text.setFont(font); // font est un sf::Font
+
+    // choix de la chaîne de caractères à afficher
+    text.setString("Hello world");
+
+    // choix de la taille des caractères
+    text.setCharacterSize(24); // exprimée en pixels, pas en points !
+
+    // choix de la couleur du texte
+    text.setColor(sf::Color::Red);
+
+    // choix du style du texte
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
  
     sf::ConvexShape carrer1;
     carrer1.setPointCount(4);
@@ -55,6 +77,7 @@ int main()
         window.draw(carrer1);
 	window.draw(carrer2);
 	window.draw(carrer3);
+	window.draw(text);
         window.display();
  
     }
