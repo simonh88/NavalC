@@ -6,35 +6,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include "getTxt.h"
+
 using namespace std;
-bool is_readable( const string & file )
-{
-    ifstream fichier( file.c_str() );
-    return !fichier.fail();
-}
 
-void read(const string & file)
-{
-    ifstream fichier( file.c_str() );
-    char charTemp;
-    while (fichier.get(charTemp))
-    {
-        cout << charTemp;
-    }
-    cout << endl;
-}
-
-void Test()
-{
-    if ( is_readable( "config.txt" ) )
-    {
-        read("config.txt");
-    }
-    else
-    {
-        cout << "Le Fichier inexistant ou non lisible.\n";
-    }
-}
 
 void tailleComposants(sf:: RenderWindow *window)
 {
@@ -64,8 +39,11 @@ void tailleComposants(sf:: RenderWindow *window)
 
 int main()
 {
-    Test();
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Formes");
+    getTxt maRecup;
+    //maRecup.Test();
+    maRecup.fillCheckerboard("config.txt");
+    maRecup.printCheckerboard();
+    sf::RenderWindow window(sf::VideoMode(1024, 728), "Formes");
 
 
 

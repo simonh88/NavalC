@@ -8,12 +8,19 @@
 class getTxt
 {
     public:
-    bool is_readable( const string & fileName );
-    void read(const string & file);
+    getTxt();
+    ~getTxt();
+    bool is_readable(const std::string & fileName);
+    void read(const std::string & file);
+    void Test();
+    void fillCheckerboard(const std::string & fileName);
+    char readAChar(const std::string & fileName, int pos);
+    int leaveAligne(const std::string & fileName);
+    //Just for check
+    void printCheckerboard();
     private:
-    string fileName;
-    const int heigt;
-    const int length;
+    int dataMap[10][10];
+
 };
 
 #endif // GETTXT_H

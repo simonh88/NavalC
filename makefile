@@ -11,7 +11,7 @@ CC = g++
 # define any compile-time flags
 CFLAGS =
 
-WARNINGS=
+WARNINGS= -Wall
 #-Wall
 
 # define any directories containing header files other than /usr/include
@@ -33,7 +33,7 @@ LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # define the CPP source files
 # TODO: update and complete the following line with your .cpp files names
-SRCS = main.cpp
+SRCS = main.cpp getTxt.cpp
 
 # define the CPP object files
 #
@@ -57,7 +57,7 @@ MAIN = Naval_C
 .PHONY: depend clean
 
 all:  $(MAIN)
-	@echo  "Everything has been compiled, w00t!"
+	@echo  "YEAH"
 
 $(MAIN): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(WARNINGS) $(INCLUDES) -o $(MAIN) $(LFLAGS) $(LIBS)
