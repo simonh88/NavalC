@@ -6,7 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "getTxt.h"
+#include "GetTxt.h"
+#include "Display.h"
 
 using namespace std;
 
@@ -39,11 +40,11 @@ void tailleComposants(sf:: RenderWindow *window)
 
 int main()
 {
-    getTxt maRecup;
+    GetTxt maRecup;
     //maRecup.Test();
     maRecup.fillCheckerboard("config.txt");
     maRecup.printCheckerboard();
-    sf::RenderWindow window(sf::VideoMode(1024, 728), "Formes");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Formes");
 
 
 

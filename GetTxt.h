@@ -5,11 +5,11 @@
 #include <iostream>
 
 
-class getTxt
+class GetTxt
 {
     public:
-    getTxt();
-    ~getTxt();
+    GetTxt();
+    virtual ~GetTxt();
     bool is_readable(const std::string & fileName);
     void read(const std::string & file);
     void Test();

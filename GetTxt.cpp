@@ -1,4 +1,4 @@
-#include "getTxt.h"
+#include "GetTxt.h"
 
 #include <cstdlib>
 #include <fstream>
@@ -8,23 +8,23 @@
 using std::cout;
 using std::endl;
 
-getTxt::getTxt()
+GetTxt::GetTxt()
 {
 
 }
-getTxt::~getTxt()
+GetTxt::~GetTxt()
 {
 
 }
 // test if the file is readable or not
 // return
-bool getTxt::is_readable(const std::string & fileName)
+bool GetTxt::is_readable(const std::string & fileName)
 {
     std::ifstream file(fileName.c_str());
     return !file.fail();
 }
 // Print the contents of the .txt
-void getTxt::read(const std::string & fileName)
+void GetTxt::read(const std::string & fileName)
 {
     std::ifstream file( fileName.c_str() );
     char charTemp;
@@ -34,8 +34,8 @@ void getTxt::read(const std::string & fileName)
     }
     cout << endl;
 }
-
-void getTxt::Test()
+//Affiche le fichier en entier
+void GetTxt::Test()
 {
     if ( is_readable( "config.txt" ) )
     {
@@ -46,7 +46,7 @@ void getTxt::Test()
         cout << "Le Fichier inexistant ou non lisible.\n";
     }
 }
-void getTxt::fillCheckerboard(const std::string & fileName)
+void GetTxt::fillCheckerboard(const std::string & fileName)
 {
     char tmp;
     int currentPos(0);
@@ -104,7 +104,7 @@ void getTxt::fillCheckerboard(const std::string & fileName)
     }
 }
 
-char getTxt::readAChar(const std::string & fileName, int pos)
+char GetTxt::readAChar(const std::string & fileName, int pos)
 {
     std::ifstream file( fileName.c_str() );
     file.seekg(pos);
@@ -114,7 +114,7 @@ char getTxt::readAChar(const std::string & fileName, int pos)
     return charTemp;
 }
 
-int getTxt::leaveAligne(const std::string & fileName)
+int GetTxt::leaveAligne(const std::string & fileName)
 {
     int myCurrentPos(0);
     std::string tmp;
@@ -124,7 +124,7 @@ int getTxt::leaveAligne(const std::string & fileName)
     return myCurrentPos;
 }
 
-void getTxt::printCheckerboard()
+void GetTxt::printCheckerboard()
 {
     cout << endl;
     for (int i(0); i<10; i++)
