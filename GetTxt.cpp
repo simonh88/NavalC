@@ -84,16 +84,20 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                 {
                     dataMap[i][j] = 1; //CAILLOU
                 }
-                    //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j];
-                    if (j<10)
-                    {
-                        j++;
-                    }
-                    else
-                    {
-                        j = 0;
-                        i++;
-                    }
+                if ((tmp == '<')||(tmp == '>')||(tmp == '=')||(tmp == 'v')||(tmp == '^')||(tmp == '|'))
+                {
+                    dataMap[i][j] = 3;
+                }
+                //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j];
+                if (j<10)
+                {
+                    j++;
+                }
+                else
+                {
+                    j = 0;
+                    i++;
+                }
                 currentPos++;
             }
         }while(!flag);
