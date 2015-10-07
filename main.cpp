@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <vector>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -40,10 +41,16 @@ void tailleComposants(sf:: RenderWindow *window)
 
 int main()
 {
+
+    std::vector<std::vector<int> > A;
     GetTxt maRecup;
     //maRecup.Test();
     maRecup.fillCheckerboard("config.txt");
     maRecup.printCheckerboard();
+    /* CA FONCTIOOOOOONNNE !
+    A = maRecup.getCheckerboard();
+    cout << endl << endl << "OOOOOOOOOOOOOOOOOOO : " << A[9][8] << endl;
+    */
     sf::RenderWindow window(sf::VideoMode(800, 600), "Formes");
 
 

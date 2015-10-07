@@ -9,3 +9,8 @@ Display::~Display()
 {
     //dtor
 }
+
+void refreshCheckerboard()
+{
+
+}

@@ -8,7 +8,7 @@
 using std::cout;
 using std::endl;
 
-GetTxt::GetTxt()
+GetTxt::GetTxt() : row(10, 0), dataMap(10, row)
 {
 
 }
@@ -128,6 +128,7 @@ int GetTxt::leaveAligne(const std::string & fileName)
     return myCurrentPos;
 }
 
+
 void GetTxt::printCheckerboard()
 {
     cout << endl;
@@ -139,4 +140,8 @@ void GetTxt::printCheckerboard()
         }
 
     }
+}
+std::vector<std::vector<int> > GetTxt::getCheckerboard()
+{
+    return dataMap;
 }
