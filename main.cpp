@@ -16,15 +16,26 @@ int main()
 {
 
     GetTxt maRecup;
-    Display realCheckerboard;
+    Display plat1;
+    Display plat2;
+    Display compenentSize;
+
     //maRecup.Test();
     maRecup.fillCheckerboard("config.txt");
     //maRecup.printCheckerboard();
-    realCheckerboard.initCheckerboard(maRecup.getCheckerboard());
-    realCheckerboard.printCheckerboard();
+    compenentSize.initCheckerboard(maRecup.getCheckerboard());
+    compenentSize.printCheckerboard();
     //cout << endl << endl << "OOOOOOOOOOOOOOOOOOO : " << A[9][8] << endl;
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Formes");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
+    if (!plat1.loadTileMap("img/test.png", sf::Vector2u(30, 30), maRecup.getCheckerboard(), 10, 10))
+        return -1;
+
+    if (!plat2.loadTileMap("img/test.png", sf::Vector2u(30, 30), maRecup.getCheckerboard(), 10, 10))
+        return -1;
+
+    plat1.setPosition(50,50);
+    plat2.setPosition(450,50);
 
 
 
@@ -41,7 +52,9 @@ int main()
                 window.close();
         }
         window.clear(sf::Color::Black);
-        realCheckerboard.tailleComposants(&window);
+        compenentSize.tailleComposants(&window);
+        window.draw(plat1);
+        window.draw(plat2);
         window.display();
 
     }
