@@ -24,6 +24,8 @@ class Display : public sf::Drawable, public sf::Transformable
         unsigned int height);
 
         bool blitStaticText(sf::RenderWindow *window);
+        sf::Text setStaticText(const std::string& word, unsigned int sizeOfFont,
+        sf::Vector2u initPos, bool bold);
 
     private:
     std::vector<std::vector<int> > realCheckerboard;

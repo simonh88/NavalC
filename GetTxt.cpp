@@ -84,9 +84,9 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                 {
                     dataMap[i][j] = 1; //CAILLOU
                 }
-                if ((tmp == '<')||(tmp == '>')||(tmp == '=')||(tmp == 'v')||(tmp == '^')||(tmp == '|'))
+                if ((tmp == '2'))
                 {
-                    dataMap[i][j] = 3;
+                    dataMap[i][j] = 2;
                 }
                 //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j];
                 if (j<10)

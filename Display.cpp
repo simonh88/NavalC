@@ -39,7 +39,6 @@ void Display::printCheckerboard()
         {
             cout << " pos(" << i << ":" << j << ") "<< realCheckerboard[i][j] << endl;
         }
-
     }
 }
 
@@ -69,35 +68,34 @@ void Display::tailleComposants(sf:: RenderWindow *window)
     window->draw(plat1);
     window->draw(plat2);
 }
+sf::Text Display::setStaticText(const std::string& word, unsigned int sizeOfFont,
+sf::Vector2u initPos, bool bold)
+{
+    font.loadFromFile("arial.ttf");
+    sf::Text myText;
+    myText.setFont(font);
+    myText.setString(word.c_str());
+    myText.setCharacterSize(sizeOfFont);
+    myText.setColor(sf::Color::White);
+    myText.setPosition(initPos.x, initPos.y);
+    if (bold)
+        myText.setStyle(sf::Text::Bold);
+    return myText;
+}
+
 
 bool Display::blitStaticText(sf::RenderWindow *window)
 {
     if (!font.loadFromFile("arial.ttf"))
        return false;
 
-    sf::Text you;
-    you.setFont(font);
-    you.setString("You");
-    you.setCharacterSize(25);
-    you.setColor(sf::Color::White);
-    you.setStyle(sf::Text::Bold);
-    you.setPosition(170,10);
-
-    sf::Text computer;
-    computer.setFont(font);
-    computer.setString("Computer");
-    computer.setCharacterSize(25);
-    computer.setColor(sf::Color::White);
-    computer.setStyle(sf::Text::Bold);
-    computer.setPosition(550,10);
-
-    window->draw(you);
-    window->draw(computer);
+    window->draw(setStaticText("You", 25, sf::Vector2u(170,10), true));
+    window->draw(setStaticText("Computer", 25, sf::Vector2u(550,10), true));
     return true;
 }
 
 bool Display::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
-                          std::vector<std::vector<int> > dataMap, unsigned int width, unsigned int height)
+std::vector<std::vector<int> > dataMap, unsigned int width, unsigned int height)
 {
     // load .png jpg isn't supported
     if (!myTileset.loadFromFile(tileset))
@@ -112,11 +110,11 @@ bool Display::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
         for (unsigned int j = 0; j < height; j++)
         {
             // backup id at this moment for the tile
-            int tileNumber = dataMap[i][j];
+            int tileNumber = dataMap[j][i];
 
             // on en déduit sa position dans la texture du tileset
-            int tu = tileNumber %1; //(myTileset.getSize().x / tileSize.x);
-            int tv = tileNumber /1; //(myTileset.getSize().x / tileSize.x);
+            int tu = tileNumber % (myTileset.getSize().x / tileSize.x);
+            int tv = tileNumber / (myTileset.getSize().x / tileSize.x);
 
 
             // on récupère un pointeur vers le quad à définir dans le tableau de vertex
