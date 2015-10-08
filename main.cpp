@@ -53,6 +53,7 @@ int main()
         }
         window.clear(sf::Color::Black);
         compenentSize.tailleComposants(&window);
+        plat1.blitStaticText(&window);
         window.draw(plat1);
         window.draw(plat2);
         window.display();

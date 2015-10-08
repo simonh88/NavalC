@@ -23,10 +23,13 @@ class Display : public sf::Drawable, public sf::Transformable
         std::vector<std::vector<int> > dataMap, unsigned int width,
         unsigned int height);
 
+        bool blitStaticText(sf::RenderWindow *window);
+
     private:
     std::vector<std::vector<int> > realCheckerboard;
     sf::VertexArray vertices;
     sf::Texture myTileset;
+    sf::Font font;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {

@@ -70,8 +70,34 @@ void Display::tailleComposants(sf:: RenderWindow *window)
     window->draw(plat2);
 }
 
+bool Display::blitStaticText(sf::RenderWindow *window)
+{
+    if (!font.loadFromFile("arial.ttf"))
+       return false;
+
+    sf::Text you;
+    you.setFont(font);
+    you.setString("You");
+    you.setCharacterSize(25);
+    you.setColor(sf::Color::White);
+    you.setStyle(sf::Text::Bold);
+    you.setPosition(170,10);
+
+    sf::Text computer;
+    computer.setFont(font);
+    computer.setString("Computer");
+    computer.setCharacterSize(25);
+    computer.setColor(sf::Color::White);
+    computer.setStyle(sf::Text::Bold);
+    computer.setPosition(550,10);
+
+    window->draw(you);
+    window->draw(computer);
+    return true;
+}
+
 bool Display::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
-std::vector<std::vector<int> > dataMap, unsigned int width, unsigned int height)
+                          std::vector<std::vector<int> > dataMap, unsigned int width, unsigned int height)
 {
     // load .png jpg isn't supported
     if (!myTileset.loadFromFile(tileset))
