@@ -28,10 +28,10 @@ int main()
     //cout << endl << endl << "OOOOOOOOOOOOOOOOOOO : " << A[9][8] << endl;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
-    if (!plat1.loadTileMap("img/test3.png", sf::Vector2u(30, 30), maRecup.getCheckerboard(), 10, 10))
+    if (!plat1.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), maRecup.getCheckerboard(), 10, 10))
         return -1;
 
-    if (!plat2.loadTileMap("img/test3.png", sf::Vector2u(30, 30), maRecup.getCheckerboard(), 10, 10))
+    if (!plat2.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), maRecup.getCheckerboard(), 10, 10))
         return -1;
 
     plat1.setPosition(50,50);
