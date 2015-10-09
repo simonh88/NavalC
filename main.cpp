@@ -16,7 +16,9 @@ using namespace std;
 int main()
 {
     GetTxt maRecup;
-    Board plat1;
+    //Board plat1;
+	Joueur J;
+	
     Board plat2;
     Display blitText;
 
