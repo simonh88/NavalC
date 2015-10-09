@@ -9,22 +9,20 @@
 
 #include "GetTxt.h"
 #include "Display.h"
+#include "Board.h"
 
 using namespace std;
 
 int main()
 {
-
     GetTxt maRecup;
-    Display plat1;
-    Display plat2;
-    Display compenentSize;
+    Board plat1;
+    Board plat2;
+    Display blitText;
 
     //maRecup.Test();
     maRecup.fillCheckerboard("config.txt");
     //maRecup.printCheckerboard();
-    compenentSize.initCheckerboard(maRecup.getCheckerboard());
-    compenentSize.printCheckerboard();
     //cout << endl << endl << "OOOOOOOOOOOOOOOOOOO : " << A[9][8] << endl;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
@@ -36,10 +34,8 @@ int main()
 
     plat1.setPosition(50,50);
     plat2.setPosition(450,50);
-
-
-
-
+    blitText.tailleComposants(&window);
+    blitText.blitStaticText(&window);
 
 
     while (window.isOpen()) // Boucle principal
@@ -52,12 +48,11 @@ int main()
                 window.close();
         }
         window.clear(sf::Color::Black);
-        compenentSize.tailleComposants(&window);
-        plat1.blitStaticText(&window);
         window.draw(plat1);
         window.draw(plat2);
         window.display();
 
     }
+    cout << endl;
     return 0;
 }

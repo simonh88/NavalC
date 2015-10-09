@@ -33,7 +33,7 @@ LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 
 # define the CPP source files
 # TODO: update and complete the following line with your .cpp files names
-SRCS = main.cpp GetTxt.cpp Display.cpp Joueur.cpp
+SRCS = main.cpp GetTxt.cpp Display.cpp Joueur.cpp Board.cpp
 
 # define the CPP object files
 #
