@@ -108,7 +108,7 @@ char GetTxt::readAChar(const std::string & fileName, int pos)
     file.seekg(pos);
     char charTemp;
     file.get( charTemp);
-    cout << endl << "position : " << pos << " valeur : " << charTemp;
+    //cout << endl << "position : " << pos << " valeur : " << charTemp;
     return charTemp;
 }
 

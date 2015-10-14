@@ -12,10 +12,10 @@ class Board : public sf::Drawable, public sf::Transformable
         Board();
         virtual ~Board();
         void printCheckerboard();
-        void initCheckerboard (const std::vector<std::vector<int> > & dataMap);
+        void updateCheckerboard (const std::vector<std::vector<int> > & dataMap);
         bool loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
-        std::vector<std::vector<int> > dataMap, unsigned int width,
-        unsigned int height);
+        unsigned int width, unsigned int height);
+        std::vector<std::vector<int> > newBoard();
 
     private:
     std::vector<std::vector<int> > realCheckerboard;

@@ -19,7 +19,13 @@ Board::~Board()
     //dtor
 }
 
-
+std::vector<std::vector<int> > Board::newBoard()
+{
+    std::vector<int> row(10, 0);
+    std::vector<std::vector<int> > myNewBoard(10, row);
+    //cout << endl << "NewBoard : " << myNewBoard[1][1] << endl;
+    return myNewBoard;
+}
 void Board::printCheckerboard()
 {
     cout << endl;
@@ -32,14 +38,14 @@ void Board::printCheckerboard()
     }
 }
 
-void Board::initCheckerboard (const std::vector<std::vector<int> > & dataMap)
+void Board::updateCheckerboard (const std::vector<std::vector<int> > & dataMap)
 {
     realCheckerboard = dataMap;
 }
 
 
 bool Board::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
-std::vector<std::vector<int> > dataMap, unsigned int width, unsigned int height)
+unsigned int width, unsigned int height)
 {
     // load .png jpg isn't supported
     if (!myTileset.loadFromFile(tileset))
@@ -54,7 +60,7 @@ std::vector<std::vector<int> > dataMap, unsigned int width, unsigned int height)
         for (unsigned int j = 0; j < height; j++)
         {
             // backup id at this moment for the tile
-            int tileNumber = dataMap[j][i];
+            int tileNumber = realCheckerboard[j][i];
 
             // on en déduit sa position dans la texture du tileset
             int tu = tileNumber % (myTileset.getSize().x / tileSize.x);
