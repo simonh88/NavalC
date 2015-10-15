@@ -11,19 +11,21 @@
 #include "Display.h"
 #include "Board.h"
 #include "Joueur.h"
+#include "Game.h"
 
 using namespace std;
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
+    window.setFramerateLimit(30);
 
     GetTxt maRecup;
     Board plat1;
     Board plat2;
-    Display blitText;
     Joueur player;
- //Position du bateau à placer
+    Game partie;
+//Position du bateau à placer
 
 
     //maRecup.Test();
@@ -36,18 +38,18 @@ int main()
     sf::Vector2i coord(289,349);
     switch(player.placeBateauH(coord,true,2))
     {
-        case 1:
-        {
-            cout << "No problems" << endl;
-            break;
-        }
-        case -1:
-        {
-            cout << "click outside of the checkerBoard"<< endl;
-            break;
-        }
-        case 0:
-            cout << "boat is too big, he exceed the size of checkerBoard" << endl;
+    case 1:
+    {
+        cout << "No problems" << endl;
+        break;
+    }
+    case -1:
+    {
+        cout << "click outside of the checkerBoard"<< endl;
+        break;
+    }
+    case 0:
+        cout << "boat is too big, he exceed the size of checkerBoard" << endl;
     }
     /** Fin test **/
     //player.printCheckerboard();
@@ -68,21 +70,9 @@ int main()
 
     while (window.isOpen()) // Boucle principal
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // évènement "fermeture demandée" : on ferme la fenêtre
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-        window.clear(sf::Color::Black);
-        blitText.tailleComposants(&window);
-        blitText.blitStaticText(&window);
-        window.draw(plat1);
-        window.draw(plat2);
-        window.display();
+        partie.startMenu(&window);
+        //partie.mainLoop(&window);
     }
-
     cout << endl;
     return 0;
 }

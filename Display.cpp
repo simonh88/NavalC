@@ -71,4 +71,20 @@ bool Display::blitStaticText(sf::RenderWindow *window)
     return true;
 }
 
+bool Display::textStartMenu(sf::RenderWindow *window)
+{
+    if (!font.loadFromFile("arial.ttf"))
+        return false;
+    if (!texture.loadFromFile("img/background_start_menu.png", sf::IntRect(0, 0, 800, 600)))
+        return false;
+    sprite.setTexture(texture);
+    window->draw(sprite);
+    window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true));
+    window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false));
+    window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false));
+    window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false));
+    window->draw(setStaticText("Press \"Enter\" to continue ", 20, sf::Vector2u(560, 575), false));
+    return true;
+}
+
 
