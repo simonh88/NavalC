@@ -9,7 +9,7 @@ using std::cout;
 using std::endl;
 
 
-Display::Display()
+Display::Display() : color(255, 255, 255, 255), receding(true)
 {
 
 }
@@ -19,6 +19,17 @@ Display::~Display()
     //dtor
 }
 
+void Display::opacitychange()
+{
+    if (color.a < 255 && !receding)
+        color.a ++;
+    if(color.a > 0 && receding)
+        color.a --;
+    if (color.a <= 0)
+        receding = false;
+    if (color.a >= 200)
+        receding = true;
+}
 
 void Display::tailleComposants(sf:: RenderWindow *window)
 {
@@ -46,10 +57,11 @@ void Display::tailleComposants(sf:: RenderWindow *window)
     window->draw(plat2);
 }
 sf::Text Display::setStaticText(const std::string& word, unsigned int sizeOfFont,
-sf::Vector2u initPos, bool bold)
+sf::Vector2u initPos, bool bold, bool flashing)
 {
     font.loadFromFile("arial.ttf");
     sf::Text myText;
+    sf::Text flashingT;
     myText.setFont(font);
     myText.setString(word.c_str());
     myText.setCharacterSize(sizeOfFont);
@@ -57,6 +69,16 @@ sf::Vector2u initPos, bool bold)
     myText.setPosition(initPos.x, initPos.y);
     if (bold)
         myText.setStyle(sf::Text::Bold);
+    if (flashing)
+    {
+        opacitychange();
+        flashingT.setFont(font);
+        flashingT.setString(word.c_str());
+        flashingT.setCharacterSize(sizeOfFont);
+        flashingT.setPosition(initPos.x, initPos.y);
+        flashingT.setColor(color);
+        return flashingT;
+    }
     return myText;
 }
 
@@ -64,10 +86,10 @@ sf::Vector2u initPos, bool bold)
 bool Display::blitStaticText(sf::RenderWindow *window)
 {
     if (!font.loadFromFile("arial.ttf"))
-       return false;
+        return false;
 
-    window->draw(setStaticText("You", 25, sf::Vector2u(170,10), true));
-    window->draw(setStaticText("Computer", 25, sf::Vector2u(550,10), true));
+    window->draw(setStaticText("You", 25, sf::Vector2u(170,10), true, false));
+    window->draw(setStaticText("Computer", 25, sf::Vector2u(550,10), true, false));
     return true;
 }
 
@@ -79,12 +101,19 @@ bool Display::textStartMenu(sf::RenderWindow *window)
         return false;
     sprite.setTexture(texture);
     window->draw(sprite);
-    window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true));
-    window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false));
-    window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false));
-    window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false));
-    window->draw(setStaticText("Press \"Enter\" to continue ", 20, sf::Vector2u(560, 575), false));
+    window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true, false));
+    window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false, false));
+    window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false, false));
+    window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false, false));
     return true;
 }
 
+bool Display::flashingText(sf::RenderWindow *window)
+{
+    if (!font.loadFromFile("arial.ttf"))
+        return false;
+        for (int i = 0; i<4; i++)
+            window->draw(setStaticText("Press \"Enter\" to continue ", 20, sf::Vector2u(560, 575), false, true));
+    return true;
+}
 

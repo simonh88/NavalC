@@ -17,6 +17,7 @@ class Board : public sf::Drawable, public sf::Transformable
         unsigned int width, unsigned int height);
         std::vector<std::vector<int> > newBoard();
 
+
     private:
     std::vector<std::vector<int> > realCheckerboard;
     sf::VertexArray vertices;

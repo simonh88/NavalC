@@ -17,6 +17,8 @@ Game::~Game()
 }
 
 
+
+
 void Game::startMenu(sf::RenderWindow *window)
 {
     while (window->pollEvent(event))
@@ -45,6 +47,7 @@ void Game::startMenu(sf::RenderWindow *window)
     }
     window->clear(sf::Color::Black);
     blitText.textStartMenu(window);
+    blitText.flashingText(window);
     window->display();
 
 }
@@ -79,7 +82,6 @@ void Game::mainLoop(sf::RenderWindow *window)
         default:
             break;
         }
-
     }
     window->clear(sf::Color::Black);
     blitText.tailleComposants(window);
