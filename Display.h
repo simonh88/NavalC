@@ -16,7 +16,7 @@ public:
     bool blitStaticText(sf::RenderWindow *window);
     sf::Text setStaticText(const std::string& word, unsigned int sizeOfFont,
     sf::Vector2u initPos, bool bold, bool flashing);
-    bool textStartMenu(sf::RenderWindow *window);
+    bool textStartMenu(sf::RenderWindow *window, int pos);
     bool flashingText(sf::RenderWindow *window);
     void opacitychange();
 

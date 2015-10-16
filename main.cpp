@@ -18,6 +18,7 @@ using namespace std;
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
+    window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(30);
 
     GetTxt maRecup;
@@ -67,10 +68,9 @@ int main()
     plat2.setPosition(450,50);
 
 
-
     while (window.isOpen()) // Boucle principal
     {
-        partie.startMenu(&window);
+        partie.generalLoop(&window);
         //partie.mainLoop(&window);
     }
     cout << endl;

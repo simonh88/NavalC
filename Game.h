@@ -20,11 +20,14 @@ class Game
         virtual ~Game();
         void startMenu(sf::RenderWindow *window);
         void mainLoop(sf::RenderWindow *window);
+        void generalLoop(sf::RenderWindow *window);
     protected:
     private:
     sf::Event event;
     Display blitText;
     int j;
+    int pos;
+    bool continuingStartMenu;
 };
 
 #endif // GAME_H

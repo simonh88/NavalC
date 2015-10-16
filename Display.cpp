@@ -93,7 +93,7 @@ bool Display::blitStaticText(sf::RenderWindow *window)
     return true;
 }
 
-bool Display::textStartMenu(sf::RenderWindow *window)
+bool Display::textStartMenu(sf::RenderWindow *window, int pos)
 {
     if (!font.loadFromFile("arial.ttf"))
         return false;
@@ -102,9 +102,20 @@ bool Display::textStartMenu(sf::RenderWindow *window)
     sprite.setTexture(texture);
     window->draw(sprite);
     window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true, false));
-    window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false, false));
-    window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false, false));
-    window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false, false));
+
+    if (pos == 0)
+        window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false, false));
+    else
+        window->draw(setStaticText("Start a game", 25, sf::Vector2u(300, 250), false, false));
+    if (pos == 1)
+        window->draw(setStaticText("Difficulty", 30, sf::Vector2u(300, 300), false, false));
+    else
+        window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false, false));
+    if (pos == 2)
+        window->draw(setStaticText("Rules", 30, sf::Vector2u(300, 350), false, false));
+    else
+        window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false, false));
+
     return true;
 }
 

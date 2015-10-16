@@ -6,7 +6,7 @@ using std::endl;
 
 
 
-Game::Game()
+Game::Game() : pos(0), continuingStartMenu(true)
 {
     //ctor
 }
@@ -32,7 +32,33 @@ void Game::startMenu(sf::RenderWindow *window)
 
         // touche pressée
         case sf::Event::KeyPressed:
-            //...
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
+                if (pos == 2)
+                    pos = 0;
+                else
+                    pos ++;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            {
+                if (pos == 0)
+                    pos = 2;
+                else
+                    pos --;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//"Enter"
+            {
+                switch(pos)
+                {
+                case 0:
+                    continuingStartMenu = false;
+                    break;
+                case 1:
+                    //A completer
+                    cout << "DIFFICULTY" << endl;
+                    break;
+                }
+            }
             break;
 
         case sf::Event::MouseButtonPressed:
@@ -43,13 +69,11 @@ void Game::startMenu(sf::RenderWindow *window)
         default:
             break;
         }
-
     }
     window->clear(sf::Color::Black);
-    blitText.textStartMenu(window);
+    blitText.textStartMenu(window, pos);
     blitText.flashingText(window);
     window->display();
-
 }
 
 
@@ -87,5 +111,14 @@ void Game::mainLoop(sf::RenderWindow *window)
     blitText.tailleComposants(window);
     blitText.blitStaticText(window);
     window->display();
+}
+
+void Game::generalLoop(sf::RenderWindow *window)
+{
+    if (continuingStartMenu)
+        startMenu(window);
+    else
+        mainLoop(window);
+
 }
 
