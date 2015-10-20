@@ -10,6 +10,8 @@ class GetTxt
     public:
     GetTxt();
     virtual ~GetTxt();
+
+    unsigned int getNbRock();
     bool is_readable(const std::string & fileName);
     void read(const std::string & file);
     void Test();
@@ -22,6 +24,7 @@ class GetTxt
     private:
     std::vector<int> row;
     std::vector<std::vector<int> > dataMap;
+    unsigned int rock;
 
 };
 

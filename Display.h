@@ -22,8 +22,12 @@ public:
 
 private:
     sf::Font font;
-    sf::Texture texture;
-    sf::Sprite sprite;
+    sf::Texture textureBG;
+    sf::Sprite spriteBG;
+    sf::Texture textureKeyUp;
+    sf::Sprite spriteKeyUp;
+    sf::Texture textureKeyDown;
+    sf::Sprite spriteKeyDown;
     sf::Color color;
     bool receding; // Need for lighting
 };

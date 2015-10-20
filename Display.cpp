@@ -97,10 +97,20 @@ bool Display::textStartMenu(sf::RenderWindow *window, int pos)
 {
     if (!font.loadFromFile("arial.ttf"))
         return false;
-    if (!texture.loadFromFile("img/background_start_menu.png", sf::IntRect(0, 0, 800, 600)))
+    if (!textureBG.loadFromFile("img/background_start_menu.png", sf::IntRect(0, 0, 800, 600)))
         return false;
-    sprite.setTexture(texture);
-    window->draw(sprite);
+    if (!textureKeyUp.loadFromFile("img/keyUp.png", sf::IntRect(0, 0, 24, 24)))
+        return false;
+    if (!textureKeyDown.loadFromFile("img/keyDown.png", sf::IntRect(0, 0, 24, 24)))
+        return false;
+    spriteBG.setTexture(textureBG);
+    spriteKeyUp.setTexture(textureKeyUp);
+    spriteKeyDown.setTexture(textureKeyDown);
+    spriteKeyUp.setPosition(250, 280);
+    spriteKeyDown.setPosition(250, 320);
+    window->draw(spriteBG);
+    window->draw(spriteKeyUp);
+    window->draw(spriteKeyDown);
     window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true, false));
 
     if (pos == 0)

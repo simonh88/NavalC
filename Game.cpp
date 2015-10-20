@@ -8,14 +8,24 @@ using std::endl;
 
 Game::Game() : pos(0), continuingStartMenu(true)
 {
-    //ctor
+    maRecup.fillCheckerboard("config.txt");
+    nbRock = maRecup.getNbRock();
+
+    moi.plat.updateCheckerboard(maRecup.getCheckerboard());
+    moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+    moi.plat.setPosition(50,50);
+
+    ia.plat.updateCheckerboard(ia.plat.newBoard());
+    //ia.plat.printCheckerboard();
+    ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+    ia.plat.setPosition(450,50);
+
 }
 
 Game::~Game()
 {
     //dtor
 }
-
 
 
 
@@ -79,6 +89,7 @@ void Game::startMenu(sf::RenderWindow *window)
 
 void Game::mainLoop(sf::RenderWindow *window)
 {
+
     while (window->pollEvent(event))
     {
         // évènement "fermeture demandée" : on ferme la fenêtre
@@ -107,9 +118,12 @@ void Game::mainLoop(sf::RenderWindow *window)
             break;
         }
     }
+    //cout << "nombre de rochers : " << nbRock << endl;
     window->clear(sf::Color::Black);
     blitText.tailleComposants(window);
     blitText.blitStaticText(window);
+    window->draw(moi.plat);
+    window->draw(ia.plat);
     window->display();
 }
 

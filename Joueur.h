@@ -14,13 +14,13 @@ class Joueur
         int placeBateauH(sf::Vector2i coord, bool verticale, int boatLength);
         Board placeBateauIA();
         void printCheckerboard();
+
+        Board plat;
     protected:
     private:
         std::vector <int> row;
 		std::vector<std::vector<int> > checkerBoard;
-		Board player;
-		bool ia; // vrais = ordi, faux = humain
-
+		bool isIa; // vrais = ordi, faux = humain
 };
 
 #endif // JOUEUR_H

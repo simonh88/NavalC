@@ -23,11 +23,14 @@ class Game
         void generalLoop(sf::RenderWindow *window);
     protected:
     private:
-    sf::Event event;
-    Display blitText;
-    int j;
-    int pos;
-    bool continuingStartMenu;
+        sf::Event event;
+        Display blitText;
+        GetTxt maRecup;
+        Joueur moi;
+        Joueur ia;
+        unsigned int nbRock;
+        int pos;
+        bool continuingStartMenu;
 };
 
 #endif // GAME_H

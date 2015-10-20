@@ -8,7 +8,7 @@
 using std::cout;
 using std::endl;
 
-GetTxt::GetTxt() : row(10, 0), dataMap(10, row)
+GetTxt::GetTxt() : row(10, 0), dataMap(10, row), rock(0)
 {
 
 }
@@ -16,6 +16,12 @@ GetTxt::~GetTxt()
 {
 
 }
+
+unsigned int GetTxt::getNbRock()
+{
+    return rock;
+}
+
 // test if the file is readable or not
 // return
 bool GetTxt::is_readable(const std::string & fileName)
@@ -79,7 +85,10 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                 if (tmp == '0')
                     dataMap[i][j] = 0; //MER
                 if (tmp == '1')
+                {
+                    rock ++;
                     dataMap[i][j] = 1; //CAILLOU
+                }
                 if ((tmp == '=')||(tmp == '<')||(tmp == '>')) // boat flat
                     dataMap[i][j] = 2;
                 if ((tmp == '|')||(tmp == '^')||(tmp == 'v')) // boat top

@@ -19,16 +19,16 @@ class Board : public sf::Drawable, public sf::Transformable
 
 
     private:
-    std::vector<std::vector<int> > realCheckerboard;
-    sf::VertexArray vertices;
-    sf::Texture myTileset;
+        std::vector<std::vector<int> > realCheckerboard;
+        sf::VertexArray vertices;
+        sf::Texture myTileset;
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
-    // on applique la transformation
-    states.transform *= getTransform();
-    states.texture = &myTileset;
-    target.draw(vertices, states);
+        // on applique la transformation
+        states.transform *= getTransform();
+        states.texture = &myTileset;
+        target.draw(vertices, states);
     }
 };
 
