@@ -171,8 +171,10 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
             }
             if (peutPlacer == false)   // si on ne peut placer, new coord aleatoire
             {
-                x = rand() % 10;
-                y = rand() % 10; //coord random
+                c = rand() % 10;
+                b = rand() % 10;//coord random
+                x = c;
+                y = b;
                 a = rand() % 2;
                 verticale = (a == 0);
             }
@@ -181,18 +183,18 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
         for (int z = 0; z < tab[i]; z++)
         {
             this->plat.setBoard(x, y, 2);
-            if (!verticale)x++;
-            else y++;
+            if (!verticale)y++;
+            else x++;
         }
     }
-this->plat.printCheckerboard();
+//this->plat.printCheckerboard();
 
 }
 
 
 int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un rocher, 2 = un bateau, 3=vide/erreur
 {
-    std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
+    //std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
     switch (plateau.getBoard(x, y))
     {
     //std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
@@ -344,7 +346,6 @@ void Joueur::ordiJoue(Board adv)
 
             case 0:
             default: // a l'eau
-
                 this->dejaJouer.push_back(std::make_pair(x, y));
 
                 break;
@@ -367,17 +368,17 @@ void Joueur::ordiJoue(Board adv)
     }
 }
 
-bool Joueur::isIn(std::list<std::pair<int, int> > list, int x, int y) // verif d'une valeur dans une liste de paire(coordonée)
+bool Joueur::isIn(std::vector<std::pair<int, int> > L, int x, int y) // verif d'une valeur dans une liste de paire(coordonée)
 {
     std::pair<int, int> cherche;
     cherche.first = x;
     cherche.second = y;
 
-    std::list<std::pair<int, int> >::iterator li;
-    li = std::find(list.begin(), list.end(), cherche);
+    std::vector<std::pair<int, int> >::iterator li;
+    li = std::find(L.begin(), L.end(), cherche);
 
-    if (li != list.end()) return true; //valeur dans la liste
-    else return false; //valeur pas dans la liste
+    if (li != L.end()) return true; //valeur dans le vector
+    else return false; //valeur pas dans le vector
 }
 
 bool Joueur::estDansQuadrillage(int x, int y)

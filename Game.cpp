@@ -89,7 +89,6 @@ void Game::startMenu(sf::RenderWindow *window)
 
 void Game::mainLoop(sf::RenderWindow *window)
 {
-
     while (window->pollEvent(event))
     {
         // évènement "fermeture demandée" : on ferme la fenêtre
@@ -112,9 +111,12 @@ void Game::mainLoop(sf::RenderWindow *window)
         case sf::Event::MouseButtonPressed:
             cout << "position en x souris : " << event.mouseButton.x << endl;
             cout << "position en y souris : " << event.mouseButton.y << endl;
+
             ia.placeBateauIA();
-            ia.plat.updateCheckerboard(ia.getcheckerBoard());
-            ia.printCheckerboard();
+            ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+            //ia.plat.printCheckerboard();
+            //ia.plat.updateCheckerboard(ia.getcheckerBoard());
+            //ia.printCheckerboard();
             break;
         // on ne traite pas les autres types d'évènements
         default:
@@ -127,6 +129,7 @@ void Game::mainLoop(sf::RenderWindow *window)
     blitText.blitStaticText(window);
     window->draw(moi.plat);
     window->draw(ia.plat);
+    //window->draw(ia.plat);
     window->display();
 }
 

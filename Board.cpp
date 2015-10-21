@@ -19,6 +19,12 @@ Board::~Board()
     //dtor
 }
 
+std::vector<std::vector<int> > Board::getCheckerboard()
+{
+    return realCheckerboard;
+}
+
+
 std::vector<std::vector<int> > Board::newBoard()
 {
     std::vector<int> row(10, 0);
@@ -93,5 +99,8 @@ void Board::setBoard(int x, int y, int value)
 
 int Board::getBoard(int x, int y)
 {
-	return this->realCheckerboard[x][y];
+    if (x >= 10 || y >= 10)
+        return 10; //ERROR
+    else
+        return this->realCheckerboard[x][y];
 }

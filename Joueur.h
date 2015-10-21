@@ -26,7 +26,7 @@ class Joueur
 		int CheckPlace(int x, int y, Board b);
 		void setDifficulty(int x);
 		void ordiJoue(Board adversaire);
-		bool isIn(std::list<std::pair<int,int> >, int x, int y);
+		bool isIn(std::vector<std::pair<int,int> >, int x, int y);
 		bool estDansQuadrillage(int x, int y);
         Board plat;
     protected:
@@ -36,8 +36,10 @@ class Joueur
 		bool isIa; // vrais = ordi, faux = humain
 		//Board plateau;
 		int ia; // 1;2;3 = ordi, 0 = humain
-		std::list <std::pair< int, int> > dejaJouer; // liste des case deja jouer / historique
-		std::list <std::pair< int, int> > touche; // liste des case ayant un bateau
+		std::vector<std::pair<int, int> > dejaJouer;
+		std::vector<std::pair<int, int> > touche;
+		//std::list <std::pair< int, int> > dejaJouer; // liste des case deja jouer / historique
+		//std::list <std::pair< int, int> > touche; // liste des case ayant un bateau
 		int strat; // "chasse", "traque","bloque"; strategie d'attaque de l'ia,
 		/*
 		1 = chasse, chercher au hazard( ia 1) en cadrillage (ia 2 3)

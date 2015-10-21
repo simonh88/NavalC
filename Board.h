@@ -18,6 +18,7 @@ class Board : public sf::Drawable, public sf::Transformable
         std::vector<std::vector<int> > newBoard();
         void setBoard(int x, int y, int value);
         int getBoard(int x, int y);
+        std::vector<std::vector<int> > getCheckerboard();
 
 
     private:
