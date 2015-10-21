@@ -88,11 +88,11 @@ unsigned int width, unsigned int height)
 
 void Board::setBoard(int x, int y, int value)
 {
-	realCheckerboard[x][y] = value;
+	this->realCheckerboard[x][y] = value;
 }
 
 int Board::getBoard(int x, int y)
 {
-	return realCheckerboard[x][y];
-
+    cout << "CHECKBOARD EN " << x << ", " << y << " = " << this->realCheckerboard[x][y] << endl;
+	return this->realCheckerboard[x][y];
 }

@@ -199,9 +199,10 @@ this->plateau.printCheckerboard();
 
 int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un rocher, 2 = un bateau, 3=vide/erreur
 {
-
-    switch (plateau.getBoard(x, y))
+    std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
+    switch (this->plateau.getBoard(x, y))
     {
+    //std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
     case 0:
         return 0;
         break;
