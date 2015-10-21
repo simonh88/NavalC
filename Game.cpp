@@ -112,6 +112,9 @@ void Game::mainLoop(sf::RenderWindow *window)
         case sf::Event::MouseButtonPressed:
             cout << "position en x souris : " << event.mouseButton.x << endl;
             cout << "position en y souris : " << event.mouseButton.y << endl;
+            ia.placeBateauIA();
+            ia.plat.updateCheckerboard(ia.getcheckerBoard());
+            ia.printCheckerboard();
             break;
         // on ne traite pas les autres types d'évènements
         default:
@@ -129,6 +132,7 @@ void Game::mainLoop(sf::RenderWindow *window)
 
 void Game::generalLoop(sf::RenderWindow *window)
 {
+    //ia.plat.printCheckerboard();
     if (continuingStartMenu)
         startMenu(window);
     else

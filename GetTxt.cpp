@@ -123,7 +123,7 @@ char GetTxt::readAChar(const std::string & fileName, int pos)
 
 int GetTxt::leaveAligne(const std::string & fileName)
 {
-    int myCurrentPos(0);
+    unsigned int myCurrentPos(0);
     std::string tmp;
     std::ifstream file( fileName.c_str() );
     std::getline(file, tmp);

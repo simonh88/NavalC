@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <time.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -21,6 +22,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
     window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(30);
+    srand(time(NULL));
 
     Game partie;
 

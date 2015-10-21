@@ -85,8 +85,6 @@ void Joueur::printCheckerboard()
 
 
 
-
-
 bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)   // placement bateau humain, si vrais, placement reusi
 {
     int x(coordmouse.x);
@@ -106,7 +104,7 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
 
         for (int i = 0; y < longueur; i++)
         {
-            if (this->CheckPlace(x, y, this->plateau) != 0)
+            if (this->CheckPlace(a, b, this->plateau) != 0)
             {
                 if (!verticale)a++;
                 else b++;
@@ -140,7 +138,7 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
     bool verticale;
     //int nbBateau = 5; // 5 bateau de 2;3;3;4;5 case
     int tab[5] = { 2,3,3,4,5 };
-    int a = rand() % 2;
+    int a;
 
     // boucle de 5 bateaux
     for (int i = 0; i < 5; i++)
@@ -153,21 +151,25 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
         int c = x; // coord temporaire pour verif
         int b = y;
         bool peutPlacer = false;
-
+        std::cout << "coucou" << std::endl;
         while (peutPlacer == false)
         {
             // verif assez de place dispo pour placer le bateau de tab[i] cases
             for (int z = 0; z < tab[i]; z++)
             {
+                std::cout << "coucou2" << std::endl;
+                std::cout << c << b << x << y << std::endl;
 
-                if (x < 10 && y < 10 && this->CheckPlace(x, y, this->plateau) != 0)
+                if (this->CheckPlace(c, b, this->plateau) == 0)
                 {
+                    std::cout << "coucou4" << std::endl;
                     if (!verticale)b++;
                     else c++;
                     peutPlacer = true;
                 }
                 else
                 {
+                    std::cout << "coucou5" << std::endl;
                     peutPlacer = false;
                     break; // sort de la boucle de verification si 1 case ne peut pas etre placée
                 }
@@ -180,15 +182,17 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
                 verticale = (a == 0);
             }
         }
-
         //placement du bateau dans le tableau de donnée;
         for (int z = 0; z < tab[i]; z++)
         {
+            std::cout << "coucou3" << std::endl;
+
             this->plateau.setBoard(x, y, 2);
             if (!verticale)x++;
             else y++;
         }
     }
+this->plateau.printCheckerboard();
 
 }
 
@@ -205,9 +209,6 @@ int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un roc
         return 1;
         break;
     case 2:
-        return 2;
-        break;
-    case 3:
         return 2;
         break;
     default:
@@ -362,7 +363,6 @@ void Joueur::ordiJoue(Board adv)
                 this->touche.push_back(std::make_pair(x,y)); //si un bateau, ajouter au bateau touche
                 //adv[][] = detruit ??!
                 break;
-
             }
         }
         else
