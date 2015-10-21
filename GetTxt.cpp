@@ -1,9 +1,11 @@
 #include "GetTxt.h"
 
+
 #include <cstdlib>
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <cassert>
 
 using std::cout;
 using std::endl;
@@ -59,10 +61,15 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
     bool flag(false);
     int counter(0);
     int i(0),j(0);
+
+
     if (is_readable( fileName.c_str() ) )
     {
+
         do
         {
+            assert(i>=0 && i<10);
+            assert(j>=0 && j<10);
             tmp = readAChar(fileName.c_str(), currentPos);
             if (tmp == '#')
             {
@@ -97,10 +104,9 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                 if (j<10)
                     j++;
                 else
-                {
-                    j = 0;
                     i++;
-                }
+                if(j == 10)
+                    j = 0;
                 currentPos++;
             }
         }while(!flag);

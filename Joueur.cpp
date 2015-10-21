@@ -156,7 +156,6 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
             // verif assez de place dispo pour placer le bateau de tab[i] cases
             for (int z = 0; z < tab[i]; z++)
             {
-
                 if (this->CheckPlace(c, b, this->plat) == 0)
                 {
                     if (!verticale)b++;
