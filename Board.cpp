@@ -84,3 +84,15 @@ unsigned int width, unsigned int height)
         }
     return true;
 }
+
+
+void Board::setBoard(int x, int y, int value)
+{
+	realCheckerboard[x][y] = value;
+}
+
+int Board::getBoard(int x, int y)
+{
+	return realCheckerboard[x][y];
+
+}

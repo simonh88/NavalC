@@ -16,6 +16,8 @@ class Board : public sf::Drawable, public sf::Transformable
         bool loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
         unsigned int width, unsigned int height);
         std::vector<std::vector<int> > newBoard();
+        void setBoard(int x, int y, int value);
+        int getBoard(int x, int y);
 
 
     private:
