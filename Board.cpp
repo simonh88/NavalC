@@ -93,6 +93,5 @@ void Board::setBoard(int x, int y, int value)
 
 int Board::getBoard(int x, int y)
 {
-    cout << "CHECKBOARD EN " << x << ", " << y << " = " << this->realCheckerboard[x][y] << endl;
 	return this->realCheckerboard[x][y];
 }

@@ -28,15 +28,13 @@ class Joueur
 		void ordiJoue(Board adversaire);
 		bool isIn(std::list<std::pair<int,int> >, int x, int y);
 		bool estDansQuadrillage(int x, int y);
-
-
         Board plat;
     protected:
     private:
         std::vector <int> row;
 		std::vector<std::vector<int> > checkerBoard;
 		bool isIa; // vrais = ordi, faux = humain
-		Board plateau;
+		//Board plateau;
 		int ia; // 1;2;3 = ordi, 0 = humain
 		std::list <std::pair< int, int> > dejaJouer; // liste des case deja jouer / historique
 		std::list <std::pair< int, int> > touche; // liste des case ayant un bateau

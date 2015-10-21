@@ -104,7 +104,7 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
 
         for (int i = 0; y < longueur; i++)
         {
-            if (this->CheckPlace(a, b, this->plateau) != 0)
+            if (this->CheckPlace(a, b, this->plat) != 0)
             {
                 if (!verticale)a++;
                 else b++;
@@ -121,7 +121,7 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
         // placement du bateau
         for (int i = 0; i < longueur; i++)
         {
-            this->plateau.setBoard(x, y, pos);
+            this->plat.setBoard(x, y, pos);
             if (verticale)y++;
             else x++;
 
@@ -151,25 +151,20 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
         int c = x; // coord temporaire pour verif
         int b = y;
         bool peutPlacer = false;
-        std::cout << "coucou" << std::endl;
-        while (peutPlacer == false)
+        while (!peutPlacer)
         {
             // verif assez de place dispo pour placer le bateau de tab[i] cases
             for (int z = 0; z < tab[i]; z++)
             {
-                std::cout << "coucou2" << std::endl;
-                std::cout << c << b << x << y << std::endl;
 
-                if (this->CheckPlace(c, b, this->plateau) == 0)
+                if (this->CheckPlace(c, b, this->plat) == 0)
                 {
-                    std::cout << "coucou4" << std::endl;
                     if (!verticale)b++;
                     else c++;
                     peutPlacer = true;
                 }
                 else
                 {
-                    std::cout << "coucou5" << std::endl;
                     peutPlacer = false;
                     break; // sort de la boucle de verification si 1 case ne peut pas etre placée
                 }
@@ -185,14 +180,12 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
         //placement du bateau dans le tableau de donnée;
         for (int z = 0; z < tab[i]; z++)
         {
-            std::cout << "coucou3" << std::endl;
-
-            this->plateau.setBoard(x, y, 2);
+            this->plat.setBoard(x, y, 2);
             if (!verticale)x++;
             else y++;
         }
     }
-this->plateau.printCheckerboard();
+this->plat.printCheckerboard();
 
 }
 
@@ -200,7 +193,7 @@ this->plateau.printCheckerboard();
 int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un rocher, 2 = un bateau, 3=vide/erreur
 {
     std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
-    switch (this->plateau.getBoard(x, y))
+    switch (plateau.getBoard(x, y))
     {
     //std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
     case 0:
