@@ -10,7 +10,7 @@
 using std::cout;
 using std::endl;
 
-GetTxt::GetTxt() : row(10, 0), dataMap(10, row), rock(0)
+GetTxt::GetTxt() : row(10, 5), dataMap(10, row), rock(0)
 {
 
 }
@@ -68,8 +68,8 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
 
         do
         {
-            assert(i>=0 && i<10);
-            assert(j>=0 && j<10);
+            //assert(i>=0 && i<10);
+            //assert(j>=0 && j<10);
             tmp = readAChar(fileName.c_str(), currentPos);
             if (tmp == '#')
             {
@@ -100,7 +100,7 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                     dataMap[i][j] = 2;
                 if ((tmp == '|')||(tmp == '^')||(tmp == 'v')) // boat top
                     dataMap[i][j] = 3;
-                //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j];
+                //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j] << endl;;
                 if (j<10)
                     j++;
                 else
@@ -115,6 +115,7 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
     {
         cout << "Le Fichier inexistant ou non lisible.\n";
     }
+    //printCheckerboard();
 }
 
 char GetTxt::readAChar(const std::string & fileName, int pos)

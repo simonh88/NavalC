@@ -82,9 +82,6 @@ void Joueur::printCheckerboard()
 }
 
 
-
-
-
 bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)   // placement bateau humain, si vrais, placement reusi
 {
     int x(coordmouse.x);

@@ -18,6 +18,55 @@ Board::~Board()
 {
     //dtor
 }
+void Board::printNbBateaux(std::vector<int> bateaux)
+{
+    int sizetab;
+    sizetab = bateaux.size();
+    //cout << sizetab << endl;
+    cout << "{ ";
+    for (int i = 0; i<sizetab; i++)
+    {
+        cout << bateaux[i];
+        if (i != sizetab-1)
+            cout << ", ";
+    }
+    cout << " }";
+
+}
+std::vector<int> Board::nbBateaux(std::vector<std::vector<int> > checkerBoard)
+{
+    int tailleHor(0);
+    int tailleVer(0);
+    int memCol(-1);
+    printCheckerboard();
+    std::vector<int> bateaux; //MAX de bateaux 50
+    for (int i(0); i<10; i++)
+    {
+        for (int j(0); j<10; j++)
+        {
+            if (checkerBoard[i][j] == 2)
+                tailleHor++;
+            if (checkerBoard[i][j] == 3)
+            {
+                tailleVer++;
+                memCol = j;
+            }
+            if ((checkerBoard[i][j] == 0 || checkerBoard[i][j] == 1) && tailleHor > 0 )
+            {
+                bateaux.push_back(tailleHor);
+                cout << bateaux[1] << endl;
+                tailleHor = 0;
+            }
+            if ((checkerBoard[i][j] == 0 || checkerBoard[i][j] == 1 || checkerBoard[i][j] == 2) && tailleVer > 0 && j == memCol)
+            {
+                bateaux.push_back(tailleVer);
+                tailleVer = 0;
+                memCol = -1;
+            }
+        }
+    }
+    return bateaux;
+}
 
 std::vector<std::vector<int> > Board::getCheckerboard()
 {
@@ -51,7 +100,7 @@ void Board::updateCheckerboard (const std::vector<std::vector<int> > & dataMap)
 
 
 bool Board::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
-unsigned int width, unsigned int height)
+                        unsigned int width, unsigned int height)
 {
     // load .png jpg isn't supported
     if (!myTileset.loadFromFile(tileset))
@@ -94,7 +143,7 @@ unsigned int width, unsigned int height)
 
 void Board::setBoard(int x, int y, int value)
 {
-	this->realCheckerboard[x][y] = value;
+    this->realCheckerboard[x][y] = value;
 }
 
 int Board::getBoard(int x, int y)
