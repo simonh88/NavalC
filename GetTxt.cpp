@@ -1,16 +1,14 @@
 #include "GetTxt.h"
 
-
 #include <cstdlib>
 #include <fstream>
 #include <string>
 #include <iostream>
-#include <cassert>
 
 using std::cout;
 using std::endl;
 
-GetTxt::GetTxt() : row(10, 5), dataMap(10, row), rock(0)
+GetTxt::GetTxt() : row(10, 0), dataMap(10, row), rock(0)
 {
 
 }
@@ -61,15 +59,10 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
     bool flag(false);
     int counter(0);
     int i(0),j(0);
-
-
     if (is_readable( fileName.c_str() ) )
     {
-
         do
         {
-            //assert(i>=0 && i<10);
-            //assert(j>=0 && j<10);
             tmp = readAChar(fileName.c_str(), currentPos);
             if (tmp == '#')
             {
@@ -100,13 +93,14 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                     dataMap[i][j] = 2;
                 if ((tmp == '|')||(tmp == '^')||(tmp == 'v')) // boat top
                     dataMap[i][j] = 3;
-                //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j] << endl;;
+                //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j];
                 if (j<10)
                     j++;
                 else
-                    i++;
-                if(j == 10)
+                {
                     j = 0;
+                    i++;
+                }
                 currentPos++;
             }
         }while(!flag);
@@ -115,7 +109,6 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
     {
         cout << "Le Fichier inexistant ou non lisible.\n";
     }
-    //printCheckerboard();
 }
 
 char GetTxt::readAChar(const std::string & fileName, int pos)

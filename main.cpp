@@ -19,10 +19,6 @@ using namespace std;
 int main()
 {
 
-    /*int i(10);
-    int j(i++ + ++i);
-    cout << "i : " << i << " j : " << j << endl;
-    */
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
     window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(30);

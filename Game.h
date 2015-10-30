@@ -21,7 +21,6 @@ class Game
         void startMenu(sf::RenderWindow *window);
         void mainLoop(sf::RenderWindow *window);
         void generalLoop(sf::RenderWindow *window);
-        void placementBateaux(sf::RenderWindow *window);
     protected:
     private:
         sf::Event event;

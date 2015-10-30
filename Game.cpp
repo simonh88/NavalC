@@ -9,14 +9,13 @@ using std::endl;
 Game::Game() : pos(0), continuingStartMenu(true)
 {
     maRecup.fillCheckerboard("config.txt");
-    this->maRecup.printCheckerboard();
     nbRock = maRecup.getNbRock();
 
-    moi.plat.updateCheckerboard(this->maRecup.getCheckerboard());
+    moi.plat.updateCheckerboard(maRecup.getCheckerboard());
     moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     moi.plat.setPosition(50,50);
 
-    ia.plat.updateCheckerboard(ia.plat.newBoard());//ia.plat.newBoard()
+    ia.plat.updateCheckerboard(ia.plat.newBoard());
     //ia.plat.printCheckerboard();
     ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     ia.plat.setPosition(450,50);
@@ -28,10 +27,7 @@ Game::~Game()
     //dtor
 }
 
-void Game::placementBateaux(sf::RenderWindow *window)
-{
 
-}
 
 void Game::startMenu(sf::RenderWindow *window)
 {
@@ -113,12 +109,11 @@ void Game::mainLoop(sf::RenderWindow *window)
             break;
 
         case sf::Event::MouseButtonPressed:
-            //cout << "position en x souris : " << event.mouseButton.x << endl;
-            //cout << "position en y souris : " << event.mouseButton.y << endl;
+            cout << "position en x souris : " << event.mouseButton.x << endl;
+            cout << "position en y souris : " << event.mouseButton.y << endl;
 
-            //ia.placeBateauIA();
-            //ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
-            moi.plat.printNbBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard()));
+            ia.placeBateauIA();
+            ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
             //ia.plat.printCheckerboard();
             //ia.plat.updateCheckerboard(ia.getcheckerBoard());
             //ia.printCheckerboard();
@@ -134,6 +129,7 @@ void Game::mainLoop(sf::RenderWindow *window)
     blitText.blitStaticText(window);
     window->draw(moi.plat);
     window->draw(ia.plat);
+    //window->draw(ia.plat);
     window->display();
 }
 
