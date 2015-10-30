@@ -77,7 +77,6 @@ void Joueur::printCheckerboard()
         {
             std::cout << " pos(" << i << ":" << j << ") "<< checkerBoard[i][j] << std::endl;
         }
-
     }
 }
 
@@ -114,10 +113,7 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
                 std::cout << "quelque chose bloque" << std::endl;
                 return false;
             }
-
-
         }
-
         // placement du bateau
         for (int i = 0; i < longueur; i++)
         {
@@ -230,6 +226,8 @@ void Joueur::ordiJoue(Board adv)
 {
     int x; //coordonées
     int y;
+    /* forcing de la difficultée ! */
+    this->ia = 1;
 
     switch (this->ia)
     {

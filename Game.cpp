@@ -12,6 +12,7 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
     nbRock = maRecup.getNbRock();
 
     moi.plat.updateCheckerboard(maRecup.getCheckerboard());
+    //moi.plat.updateCheckerboard(moi.plat.newBoard()); // si tu veux un board clean
     moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     moi.plat.setPosition(50,50);
 
@@ -19,6 +20,10 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
     //ia.plat.printCheckerboard();
     ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     ia.plat.setPosition(450,50);
+
+    tmp.plat.updateCheckerboard(tmp.plat.newBoard());
+    tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+    tmp.plat.setPosition(50,150);
 }
 
 Game::~Game()
@@ -86,6 +91,9 @@ void Game::startMenu(sf::RenderWindow *window)
 
 void Game::placementLoop(sf::RenderWindow *window)
 {
+    /* Au cas ou c'est modif (recommencer une partie)*/
+    if(tmp.plat.getPosition().x != 50)
+        tmp.plat.setPosition(50,150);
     while (window->pollEvent(event))
     {
         switch (event.type)
@@ -96,12 +104,16 @@ void Game::placementLoop(sf::RenderWindow *window)
         case sf::Event::KeyPressed:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             {
-                continuingStartMenu = true;
+                continuingStartMenu = true; // retour au menu
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             {
-                ia.placeBateauIA();
+                ia.placeBateauIA(); // Placement des bateaux de l'ia en secret
                 ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+                /* TEMPORAIRE IA VS IA */
+                /*moi.placeBateauIA();
+                moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+                */
                 placementMenu = false;
             }
             break;
@@ -110,6 +122,8 @@ void Game::placementLoop(sf::RenderWindow *window)
         }
     }
     window->clear(sf::Color::Black);
+    blitText.textPlacementLoop(window);
+    window->draw(tmp.plat);
     window->display();
 }
 
@@ -137,6 +151,8 @@ void Game::mainLoop(sf::RenderWindow *window)
         case sf::Event::MouseButtonPressed:
             cout << "position en x souris : " << event.mouseButton.x << endl;
             cout << "position en y souris : " << event.mouseButton.y << endl;
+            //ia.ordiJoue(moi);
+
             ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
             this->ia.plat.printNbBateaux();
 

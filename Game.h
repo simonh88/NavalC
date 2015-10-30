@@ -29,6 +29,7 @@ class Game
         GetTxt maRecup;
         Joueur moi;
         Joueur ia;
+        Joueur tmp; //utiliser pour le choix des bateaux et pour cacher l'affichage de l'ordi
         unsigned int nbRock;
         int pos;
         bool continuingStartMenu;

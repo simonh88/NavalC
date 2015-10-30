@@ -19,6 +19,7 @@ public:
     bool textStartMenu(sf::RenderWindow *window, int pos);
     bool flashingText(sf::RenderWindow *window);
     void opacitychange();
+    bool textPlacementLoop(sf::RenderWindow *window);
 
 private:
     sf::Font font;

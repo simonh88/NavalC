@@ -93,6 +93,12 @@ bool Display::blitStaticText(sf::RenderWindow *window)
     return true;
 }
 
+bool Display::textPlacementLoop(sf::RenderWindow *window)
+{
+    window->draw(setStaticText("Placez vos bateaux !", 30, sf::Vector2u(250,10), true, false));
+    return true;
+}
+
 bool Display::textStartMenu(sf::RenderWindow *window, int pos)
 {
     if (!font.loadFromFile("arial.ttf"))
