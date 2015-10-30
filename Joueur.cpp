@@ -182,9 +182,13 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
         //placement du bateau dans le tableau de donnée;
         for (int z = 0; z < tab[i]; z++)
         {
-            this->plat.setBoard(x, y, 2);
-            if (!verticale)y++;
-            else x++;
+            if(!verticale){
+                this->plat.setBoard(x, y, 2);
+                y++;
+            }else{
+                this->plat.setBoard(x, y, 3);
+                x++;
+            }
         }
     }
 //this->plat.printCheckerboard();

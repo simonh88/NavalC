@@ -21,6 +21,7 @@ class Game
         void startMenu(sf::RenderWindow *window);
         void mainLoop(sf::RenderWindow *window);
         void generalLoop(sf::RenderWindow *window);
+        void placementLoop(sf::RenderWindow *window);
     protected:
     private:
         sf::Event event;
@@ -31,6 +32,7 @@ class Game
         unsigned int nbRock;
         int pos;
         bool continuingStartMenu;
+        bool placementMenu;
 };
 
 #endif // GAME_H

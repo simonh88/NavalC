@@ -6,7 +6,7 @@ using std::endl;
 
 
 
-Game::Game() : pos(0), continuingStartMenu(true)
+Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
 {
     maRecup.fillCheckerboard("config.txt");
     nbRock = maRecup.getNbRock();
@@ -19,14 +19,12 @@ Game::Game() : pos(0), continuingStartMenu(true)
     //ia.plat.printCheckerboard();
     ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     ia.plat.setPosition(450,50);
-
 }
 
 Game::~Game()
 {
     //dtor
 }
-
 
 
 void Game::startMenu(sf::RenderWindow *window)
@@ -39,7 +37,6 @@ void Game::startMenu(sf::RenderWindow *window)
         case sf::Event::Closed:
             window->close();
             break;
-
         // touche pressée
         case sf::Event::KeyPressed:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -62,6 +59,7 @@ void Game::startMenu(sf::RenderWindow *window)
                 {
                 case 0:
                     continuingStartMenu = false;
+                    placementMenu = true;
                     break;
                 case 1:
                     //A completer
@@ -86,6 +84,34 @@ void Game::startMenu(sf::RenderWindow *window)
     window->display();
 }
 
+void Game::placementLoop(sf::RenderWindow *window)
+{
+    while (window->pollEvent(event))
+    {
+        switch (event.type)
+        {
+        case sf::Event::Closed:
+            window->close();
+            break;
+        case sf::Event::KeyPressed:
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            {
+                continuingStartMenu = true;
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+            {
+                ia.placeBateauIA();
+                ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+                placementMenu = false;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    window->clear(sf::Color::Black);
+    window->display();
+}
 
 void Game::mainLoop(sf::RenderWindow *window)
 {
@@ -111,9 +137,11 @@ void Game::mainLoop(sf::RenderWindow *window)
         case sf::Event::MouseButtonPressed:
             cout << "position en x souris : " << event.mouseButton.x << endl;
             cout << "position en y souris : " << event.mouseButton.y << endl;
+            ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
+            this->ia.plat.printNbBateaux();
 
-            ia.placeBateauIA();
-            ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+            //ia.placeBateauIA();
+            //ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
             //ia.plat.printCheckerboard();
             //ia.plat.updateCheckerboard(ia.getcheckerBoard());
             //ia.printCheckerboard();
@@ -138,8 +166,9 @@ void Game::generalLoop(sf::RenderWindow *window)
     //ia.plat.printCheckerboard();
     if (continuingStartMenu)
         startMenu(window);
+    else if (placementMenu)
+        placementLoop(window);
     else
         mainLoop(window);
-
 }
 
