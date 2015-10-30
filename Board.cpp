@@ -65,10 +65,10 @@ void Board::printNbBateaux()
 std::vector<int> Board::nbBateaux(std::vector<std::vector<int> > checkerBoard)
 {
     int tailleHor(0);
-    int tailleVer(0);
-    int memCol(-1);
+    int tab[10] = {0};
     //printCheckerboard();
     std::vector<int> bateaux; //MAX de bateaux 50
+
     for (int i(0); i<10; i++)
     {
         for (int j(0); j<10; j++)
@@ -77,8 +77,7 @@ std::vector<int> Board::nbBateaux(std::vector<std::vector<int> > checkerBoard)
                 tailleHor++;
             if (checkerBoard[i][j] == 3)
             {
-                tailleVer++;
-                memCol = j;
+                tab[j] += 1;
             }
             if ((checkerBoard[i][j] == 0 || checkerBoard[i][j] == 1) && tailleHor > 0 )
             {
@@ -86,13 +85,20 @@ std::vector<int> Board::nbBateaux(std::vector<std::vector<int> > checkerBoard)
                 //cout << bateaux[1] << endl;
                 tailleHor = 0;
             }
-            if ((checkerBoard[i][j] == 0 || checkerBoard[i][j] == 1 || checkerBoard[i][j] == 2) && tailleVer > 0 && j == memCol)
+            /*if ((checkerBoard[i][j] == 0 || checkerBoard[i][j] == 1 || checkerBoard[i][j] == 2) && tailleVer > 0 && j == memCol)
             {
                 bateaux.push_back(tailleVer);
                 tailleVer = 0;
                 memCol = -1;
-            }
+            }*/
         }
+    }
+    if(tailleHor>0) // exception quand le bateau touche le coin droit en bas
+        bateaux.push_back(tailleHor);
+    for (int k(0); k<10; k++)
+    {
+        if (tab[k]>0)
+            bateaux.push_back(tab[k]);
     }
     nbBoat = bateaux.size();
     return bateaux;
