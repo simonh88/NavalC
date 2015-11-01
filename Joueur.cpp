@@ -1,16 +1,20 @@
 #include "Joueur.h"
 
+/*Constructor (surchage pour init le checkerboard à 0 */
 Joueur::Joueur() : row(10, 0), checkerBoard(10, row)  // default Humain
 {
     this->ia = 0;
 }
 
-
+/*Constructor avec un param x pour défénir
+ * la difficulté de l'ordi
+ */
 Joueur::Joueur(int x) // 1;2;3 = ordi, 0 = humain
 {
     this->ia = x;
 }
 
+/*Destructor */
 Joueur::~Joueur()
 {
     //dtor
@@ -19,7 +23,7 @@ Joueur::~Joueur()
 
 
 
-
+/* Getteur du checkerboard */
 std::vector<std::vector<int> > Joueur::getcheckerBoard()
 {
     return checkerBoard;
@@ -68,6 +72,7 @@ std::vector<std::vector<int> > Joueur::getcheckerBoard()
     return 1; // No problems
 }
 */
+/*Affichage du checkerboard pour debug */
 void Joueur::printCheckerboard()
 {
     std::cout << std::endl;
@@ -83,8 +88,9 @@ void Joueur::printCheckerboard()
 
 
 
+// placement bateau humain, si vrais, placement reusi
 
-bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)   // placement bateau humain, si vrais, placement reusi
+bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
 {
     int x(coordmouse.x);
     int y(coordmouse.y);
@@ -126,9 +132,12 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
     }
     return false;
 }
-
+/* Du coup, ici, rajouter peut être un param qui contient le vector des bateaux */
 void Joueur::placeBateauIA()   // placement bateau de l'ia
 {
+    /* On pourra lire le nombre de bateaux que le joueur à placer
+     * et par la suite utiliser le tableau qui contient tout les tailles.
+     */
     int x;
     int y;
     bool verticale;

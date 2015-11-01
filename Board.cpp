@@ -8,23 +8,26 @@
 using std::cout;
 using std::endl;
 
-
+/*Constructeur */
 Board::Board()
 {
     //ctor
 }
-
+/* Destructeur */
 Board::~Board()
 {
     //dtor
 }
-
+/*Getteur du checkerboard */
 std::vector<std::vector<int> > Board::getCheckerboard()
 {
     return realCheckerboard;
 }
 
-
+/*Initialisation d'un board tout initialisé à 0
+ *Donc tout de l'eau
+ *On return ce nouveau board
+ */
 std::vector<std::vector<int> > Board::newBoard()
 {
     std::vector<int> row(10, 0);
@@ -32,6 +35,9 @@ std::vector<std::vector<int> > Board::newBoard()
     //cout << endl << "NewBoard : " << myNewBoard[1][1] << endl;
     return myNewBoard;
 }
+/*Affichage console du checkerboard
+ * Pour debugage
+ */
 void Board::printCheckerboard()
 {
     cout << endl;
@@ -43,6 +49,9 @@ void Board::printCheckerboard()
         }
     }
 }
+/*Affichage console du tableau de bateau
+ * pour debug
+ */
 void Board::printBateaux(std::vector<int> bateaux)
 {
 
@@ -58,10 +67,16 @@ void Board::printBateaux(std::vector<int> bateaux)
     }
     cout << " }";
 }
+/*Affichage du nombre de bateaux
+ * pour debug
+ */
 void Board::printNbBateaux()
 {
     cout << "Nombre de bateaux : " << nbBoat << endl;
 }
+/* Comptage du nombre de bateaux d'un board
+ * Return un tableau contenant les tailles des bateaux(vector)
+ */
 std::vector<int> Board::nbBateaux(std::vector<std::vector<int> > checkerBoard)
 {
     int tailleHor(0);
@@ -104,13 +119,18 @@ std::vector<int> Board::nbBateaux(std::vector<std::vector<int> > checkerBoard)
     return bateaux;
 }
 
-
+/*Pour actualiser le private checkerboard et donc actualiser l'affichage
+ * En quelques sortes setter du realCheckerboard (moddifieur)
+ */
 void Board::updateCheckerboard (const std::vector<std::vector<int> > & dataMap)
 {
     realCheckerboard = dataMap;
 }
 
-
+/*Chargement du tileset et donc du tilemap
+ * Plus d'infos :
+ */
+/**http://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array-fr.php**/
 bool Board::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
 unsigned int width, unsigned int height)
 {
@@ -152,12 +172,12 @@ unsigned int width, unsigned int height)
     return true;
 }
 
-
+/* Setter d'une seule case du checkerboard */
 void Board::setBoard(int x, int y, int value)
 {
 	this->realCheckerboard[x][y] = value;
 }
-
+/* Getter d'une seule case du checkerboard */
 int Board::getBoard(int x, int y)
 {
     if (x >= 10 || y >= 10)

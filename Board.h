@@ -29,6 +29,7 @@ class Board : public sf::Drawable, public sf::Transformable
         sf::VertexArray vertices;
         sf::Texture myTileset;
 
+    /** Plus d'infos : http://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array-fr.php **/
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         // on applique la transformation

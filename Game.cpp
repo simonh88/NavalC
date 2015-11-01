@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 
-
+/*Constructeur utilisant la surcharge pour init pos et les deux booleens */
 Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
 {
     maRecup.fillCheckerboard("config.txt");
@@ -25,13 +25,13 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
     tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     tmp.plat.setPosition(50,150);
 }
-
+/*Destructor*/
 Game::~Game()
 {
     //dtor
 }
 
-
+/*Fonction gerant le menu de start */
 void Game::startMenu(sf::RenderWindow *window)
 {
     while (window->pollEvent(event))
@@ -88,7 +88,7 @@ void Game::startMenu(sf::RenderWindow *window)
     blitText.flashingText(window);
     window->display();
 }
-
+/*Fonction gérant le moment ou il faut placer les bateaux*/
 void Game::placementLoop(sf::RenderWindow *window)
 {
     /* Au cas ou c'est modif (recommencer une partie)*/
@@ -126,7 +126,7 @@ void Game::placementLoop(sf::RenderWindow *window)
     window->draw(tmp.plat);
     window->display();
 }
-
+/*Fonction gérant l'affichage du déroulement de la partie */
 void Game::mainLoop(sf::RenderWindow *window)
 {
     while (window->pollEvent(event))
@@ -176,7 +176,7 @@ void Game::mainLoop(sf::RenderWindow *window)
     //window->draw(ia.plat);
     window->display();
 }
-
+/*Fonction gérant le déroulement de A à Z le jeu */
 void Game::generalLoop(sf::RenderWindow *window)
 {
     //ia.plat.printCheckerboard();

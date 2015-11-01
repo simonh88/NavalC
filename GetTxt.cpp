@@ -7,7 +7,9 @@
 
 using std::cout;
 using std::endl;
-
+/*Constructeur utilisant la surcharge pour initialiser notre board à 0
+ * et le nombre de cailloux à 0
+ */
 GetTxt::GetTxt() : row(10, 0), dataMap(10, row), rock(0)
 {
 

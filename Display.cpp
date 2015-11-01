@@ -8,17 +8,18 @@
 using std::cout;
 using std::endl;
 
-
+/*Constructeur utilisant la surcharge pour init auto color et receding */
 Display::Display() : color(255, 255, 255, 255), receding(true)
 {
 
 }
-
+/* Destructor */
 Display::~Display()
 {
     //dtor
 }
 
+/*Permet de faire varier l'opaciter des textes pour faire clignoter */
 void Display::opacitychange()
 {
     if (color.a < 255 && !receding)
@@ -30,7 +31,9 @@ void Display::opacitychange()
     if (color.a >= 200)
         receding = true;
 }
-
+/*Affiche les rectangles ou doivent se trouver les grilles
+ * Juste des repères pour debug plus facilement
+ */
 void Display::tailleComposants(sf:: RenderWindow *window)
 {
     // Ligne de séparation du milieu écran
@@ -56,6 +59,7 @@ void Display::tailleComposants(sf:: RenderWindow *window)
     window->draw(plat1);
     window->draw(plat2);
 }
+/* Pour afficher du texte static(qui ne bouge pas) choix de plusieurs param */
 sf::Text Display::setStaticText(const std::string& word, unsigned int sizeOfFont,
 sf::Vector2u initPos, bool bold, bool flashing)
 {
@@ -82,7 +86,9 @@ sf::Vector2u initPos, bool bold, bool flashing)
     return myText;
 }
 
-
+/*Affichage du texte static dans la main loop
+ * A completer !!!!
+ */
 bool Display::blitStaticText(sf::RenderWindow *window)
 {
     if (!font.loadFromFile("arial.ttf"))
@@ -92,13 +98,15 @@ bool Display::blitStaticText(sf::RenderWindow *window)
     window->draw(setStaticText("Computer", 25, sf::Vector2u(550,10), true, false));
     return true;
 }
-
+/*Affichage du texte static dans le placementloop
+ * Moment ou les bateaux sont placés par l'humain
+ */
 bool Display::textPlacementLoop(sf::RenderWindow *window)
 {
     window->draw(setStaticText("Placez vos bateaux !", 30, sf::Vector2u(250,10), true, false));
     return true;
 }
-
+/*Affichage du texte et des sprites du StartMenu*/
 bool Display::textStartMenu(sf::RenderWindow *window, int pos)
 {
     if (!font.loadFromFile("arial.ttf"))
@@ -134,7 +142,7 @@ bool Display::textStartMenu(sf::RenderWindow *window, int pos)
 
     return true;
 }
-
+/*Affiche le text clignotant*/
 bool Display::flashingText(sf::RenderWindow *window)
 {
     if (!font.loadFromFile("arial.ttf"))

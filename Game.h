@@ -25,15 +25,15 @@ class Game
     protected:
     private:
         sf::Event event;
-        Display blitText;
-        GetTxt maRecup;
+        Display blitText; //Permet d'afficher tout les textes et sprites au fil du temps
+        GetTxt maRecup; //Permet la récupération du fichier .txt
         Joueur moi;
         Joueur ia;
         Joueur tmp; //utiliser pour le choix des bateaux et pour cacher l'affichage de l'ordi
         unsigned int nbRock;
-        int pos;
-        bool continuingStartMenu;
-        bool placementMenu;
+        int pos;  //Permet de se repérer dans le startingMenu pour naviguer entre les sous menus
+        bool continuingStartMenu;  //Permet de savoir si on a besoin d'afficher le startmenu
+        bool placementMenu;  // Permet de savoir si on a besoin d'afficher le placementMenu
 };
 
 #endif // GAME_H
