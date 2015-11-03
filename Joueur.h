@@ -38,14 +38,15 @@ class Joueur
 		int ia; // 1;2;3 = ordi, 0 = humain
 		std::vector<std::pair<int, int> > dejaJouer;
 		std::vector<std::pair<int, int> > touche;
-		//std::list <std::pair< int, int> > dejaJouer; // liste des case deja jouer / historique
-		//std::list <std::pair< int, int> > touche; // liste des case ayant un bateau
+		std::vector<std::pair<int, int> > First; // premiere partie du bateau touché, pour revenir en arriere
+
 		int strat; // "chasse", "traque","bloque"; strategie d'attaque de l'ia,
 		/*
 		1 = chasse, chercher au hazard( ia 1) en cadrillage (ia 2 3)
 		2 = traque, cherche autour d'un bateau touché (ia 2) et continue dans la ligne
 		3= l'ordi a toucher un rocher au tour precedent il passe sont tour
 		*/
+		int neso; // Nord1, Sud2, Ouest3, Est4
 };
 
 #endif // JOUEUR_H

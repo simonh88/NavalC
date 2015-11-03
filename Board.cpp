@@ -130,7 +130,7 @@ void Board::updateCheckerboard (const std::vector<std::vector<int> > & dataMap)
 /*Chargement du tileset et donc du tilemap
  * Plus d'infos :
  */
-/**http://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array-fr.php**/
+/**http://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array-fr.php **/
 bool Board::loadTileMap(const std::string& tileset, sf::Vector2u tileSize,
 unsigned int width, unsigned int height)
 {

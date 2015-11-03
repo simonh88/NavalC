@@ -66,6 +66,7 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
         do
         {
             tmp = readAChar(fileName.c_str(), currentPos);
+			
             if (tmp == '#')
             {
                 //cout << "Pas intéressant" << endl;
@@ -77,7 +78,7 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                     flag = true;
                 }
             }
-            else if (tmp == ' ')
+            else if (tmp == ' ' || tmp == '\n')
             {
                 currentPos++;
             }
@@ -96,7 +97,8 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                 if ((tmp == '|')||(tmp == '^')||(tmp == 'v')) // boat top
                     dataMap[i][j] = 3;
                 //cout << " pos(" << i << ":" << j << ") "<< dataMap[i][j];
-                if (j<10)
+
+                if (j<9)
                     j++;
                 else
                 {
@@ -106,6 +108,7 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
                 currentPos++;
             }
         }while(!flag);
+
     }
     else
     {
