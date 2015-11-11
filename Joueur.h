@@ -26,6 +26,7 @@ class Joueur
 		int CheckPlace(int x, int y, Board b);
 		void setDifficulty(int x);
 		void ordiJoue(Board adversaire);
+		bool joueurJoue(Board adversaire,Board tmp, int x, int y); // si retourne vrais, la zone cliqué est dans le tableau adverse, sinon il faut recommencer
 		bool isIn(std::vector<std::pair<int,int> >, int x, int y);
 		bool estDansQuadrillage(int x, int y);
         Board plat;

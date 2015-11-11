@@ -132,6 +132,81 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
 	}
 	return false;
 }
+
+
+bool Joueur::joueurJoue(Board adv, Board tmp, int x, int y) { // x, y les coordonné de la souris sans direct, board tmp sera l'affichage du board adverse
+
+	
+	x = x - 450; // valeurs de la premier case est de 450, on simplifie en mettant x a zero
+	y = y - 50; // valeurs de la premier case est de 50, on simplifie en mettant y a zero
+	
+	if (x >= 0 || y >= 0 || x > 399 || y > 299) {
+		if (x <= 299) x = 9;
+		if (x <= 269) x = 8;
+		if (x <= 239) x = 7;
+		if (x <= 209) x = 6;		
+		if (x <= 179) x = 5;
+		if (x <= 149) x = 4;
+		if (x <= 119) x = 3;
+		if (x <= 89) x = 2;
+		if (x <= 59) x = 1;
+		if (x <= 29) x = 0; // donne la  case x dans le tableau adverse
+
+		if (y <= 299) y = 9;
+		if (y <= 269) y = 8;
+		if (y <= 239) y = 7;
+		if (y <= 209) y = 6;
+		if (y <= 179) y = 5;
+		if (y <= 149) y = 4;
+		if (y <= 119) y = 3;
+		if (y <= 89) y = 2;
+		if (y <= 59) y = 1;
+		if (y <= 29) y = 0; // donne la case y dans le tableau adverse;
+
+		int a = CheckPlace(x, y, adv);
+
+		switch (a) {
+		case 0: // a l'eau
+			adv.setBoard(x, y, 4);
+			tmp.setBoard(x, y, 4); // place sur le board afficher une croix bleu 
+			return true;
+			break;
+		case 1: // rocher
+			//TODO faire passer son tour
+			tmp.setBoard(x, y, 1); // place sur le board afficher un rocher
+			return true;
+			break;
+		case 2: // touche bateau
+			adv.setBoard(x, y, 5);
+			tmp.setBoard(x, y, 5); // place sur le board afficher, une croix rouge representant la bateau touché
+			return true;
+		case 3: // zone deja touché, deja joué, ( où hors tableau si la verif a bugé)
+		default:
+			return false;
+			break;
+		}
+	
+	
+	}else{
+		return false; // le clique n'était pas dans le tableau;
+	}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Du coup, ici, rajouter peut être un param qui contient le vector des bateaux */
 void Joueur::placeBateauIA()   // placement bateau de l'ia
 {
@@ -202,7 +277,7 @@ void Joueur::placeBateauIA()   // placement bateau de l'ia
 }
 
 
-int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un rocher, 2 = un bateau, 3=vide/erreur
+int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un rocher, 2 = un bateau, 3 = erreur, zone deja touché(anormale)
 {
 	//std::cout << "le Board : " << plateau.getBoard(x, y) << std::endl;
 	switch (plateau.getBoard(x, y))
@@ -215,6 +290,7 @@ int Joueur::CheckPlace(int x, int y, Board plateau)   // 0 = de l'eau, 1= un roc
 		return 1;
 		break;
 	case 2:
+	case 3:
 		return 2;
 		break;
 	default:
