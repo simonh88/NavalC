@@ -20,6 +20,7 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
     //ia.plat.printCheckerboard();
     ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     ia.plat.setPosition(450,50);
+	ia.setDifficulty(1); // de base facile
 
     tmp.plat.updateCheckerboard(tmp.plat.newBoard());
     tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
