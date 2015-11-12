@@ -714,6 +714,8 @@ void Joueur::ordiJoue(Board adv)
 					case 0:
 					default: // a l'eau
 						this->dejaJouer.push_back(std::make_pair(x, y));
+						adv.setBoard(x, y, 5); // TODO img croix bleu
+
 
 						break;
 					case 1: // un rocher
@@ -723,13 +725,13 @@ void Joueur::ordiJoue(Board adv)
 						break;
 					case 2:
 						this->touche.push_back(std::make_pair(x, y)); //si un bateau, ajouter au bateau touche
-						//adv[][] = detruit ??!
+						adv.setBoard(x, y, 4); // TODO img croix rouge
 						break;
 					}
 				}
 				else
 				{
-					//printf("passe son tour");
+					//pass ton tour cout << <<
 				}
 				break;
 					}
