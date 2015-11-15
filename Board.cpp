@@ -45,8 +45,9 @@ void Board::printCheckerboard()
     {
         for (int j(0); j<10; j++)
         {
-            cout << " pos(" << i << ":" << j << ") "<< realCheckerboard[i][j] << endl;
+            cout << realCheckerboard[i][j];
         }
+        cout << endl;
     }
 }
 /*Affichage console du tableau de bateau
@@ -143,11 +144,12 @@ unsigned int width, unsigned int height)
     vertices.resize(width * height * 4);
 
     // fill the vertex with a quad for one tile
-    for (unsigned int i = 0; i < width; i++)
+    for (unsigned int i = 0; i < width; i++){
         for (unsigned int j = 0; j < height; j++)
         {
             // backup id at this moment for the tile
             int tileNumber = realCheckerboard[j][i];
+            cout << "tileNumber :" << tileNumber << " ";
 
             // on en déduit sa position dans la texture du tileset
             int tu = tileNumber % (myTileset.getSize().x / tileSize.x);
@@ -169,6 +171,8 @@ unsigned int width, unsigned int height)
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
         }
+        cout << endl;
+    }
     return true;
 }
 

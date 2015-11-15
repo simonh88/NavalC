@@ -196,9 +196,6 @@ bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) { // x, y les coor
 	else {
 		return false; // le clique n'était pas dans le tableau;
 	}
-
-
-
 }
 
 

@@ -158,15 +158,14 @@ void Game::mainLoop(sf::RenderWindow *window)
 			res = moi.joueurJoue(&ia.plat, &tmp.plat, event.mouseButton.x, event.mouseButton.y);
 
 			if (res == true) {
-				ia.printCheckerboard();
+				ia.plat.printCheckerboard();
 
-				ia.ordiJoue(&moi.plat);
-				tmp.printCheckerboard();
+				this->ia.ordiJoue(&moi.plat);
+				tmp.plat.printCheckerboard();
 				ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
 				this->ia.plat.printNbBateaux();
-        tmp.plat.updateCheckerboard(tmp.getcheckerBoard());
-        ia.plat.updateCheckerboard(ia.getcheckerBoard());
-        moi.plat.updateCheckerboard(moi.getcheckerBoard());
+				moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
+				tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				//ia.placeBateauIA();
 				//ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 			   // ia.plat.printCheckerboard();
