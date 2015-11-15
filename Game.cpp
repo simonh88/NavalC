@@ -20,7 +20,7 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
     //ia.plat.printCheckerboard();
     ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
     ia.plat.setPosition(450,50);
-	ia.setDifficulty(1); // de base facile
+	ia.setDifficulty(2); // de base facile
 
     tmp.plat.updateCheckerboard(tmp.plat.newBoard());
     tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
@@ -111,7 +111,7 @@ void Game::placementLoop(sf::RenderWindow *window)
             {
                 ia.placeBateauIA(); // Placement des bateaux de l'ia en secret
                 ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
-                /* TEMPORAIRE IA VS IA */
+                /* TEMPORAIRE IA VS IA 
                 /*moi.placeBateauIA();
                 moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
                 */
@@ -154,17 +154,17 @@ void Game::mainLoop(sf::RenderWindow *window)
             cout << "position en y souris : " << event.mouseButton.y << endl;
 
 			//res = moi.joueurJoue(ia.plat, tmp.plat, event.mouseButton.x, event.mouseButton.y);
-            
-			ia.ordiJoue(moi.plat);
 			
+			ia.ordiJoue(&moi.plat);
+			moi.printCheckerboard();
             ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
             this->ia.plat.printNbBateaux();
 
             //ia.placeBateauIA();
             //ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
-            ia.plat.printCheckerboard();
+           // ia.plat.printCheckerboard();
             //ia.plat.updateCheckerboard(ia.getcheckerBoard());
-            //ia.printCheckerboard();
+            
             break;
         // on ne traite pas les autres types d'évènements
         default:

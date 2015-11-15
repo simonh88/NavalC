@@ -25,11 +25,12 @@ class Joueur
 		void placeBateauIA();
 		int CheckPlace(int x, int y, Board b);
 		void setDifficulty(int x);
-		void ordiJoue(Board adversaire);
-		bool joueurJoue(Board adversaire,Board tmp, int x, int y); // si retourne vrais, la zone cliqué est dans le tableau adverse, sinon il faut recommencer
+		void ordiJoue(Board* adversaire);
+		bool joueurJoue(Board* adversaire,Board* tmp, int x, int y); // si retourne vrais, la zone cliqué est dans le tableau adverse, sinon il faut recommencer
 		bool isIn(std::vector<std::pair<int,int> >, int x, int y);
 		bool estDansQuadrillage(int x, int y);
         Board plat;
+		int getIA();
     protected:
     private:
         std::vector <int> row;
@@ -41,7 +42,7 @@ class Joueur
 		std::vector<std::pair<int, int> > touche;
 		std::vector<std::pair<int, int> > First; // premiere partie du bateau touché, pour revenir en arriere
 
-		int strat; // "chasse", "traque","bloque"; strategie d'attaque de l'ia,
+		int strat = 1; // "chasse", "traque","bloque"; strategie d'attaque de l'ia,
 		/*
 		1 = chasse, chercher au hazard( ia 1) en cadrillage (ia 2 3)
 		2 = traque, cherche autour d'un bateau touché (ia 2) et continue dans la ligne

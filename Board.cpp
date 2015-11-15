@@ -180,7 +180,7 @@ void Board::setBoard(int x, int y, int value)
 /* Getter d'une seule case du checkerboard */
 int Board::getBoard(int x, int y)
 {
-    if (x >= 10 || y >= 10)
+    if (x >= 10 || y >= 10 || x <0 || y <0)
         return 10; //ERROR
     else
         return this->realCheckerboard[x][y];
