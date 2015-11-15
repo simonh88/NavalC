@@ -152,14 +152,17 @@ void Game::mainLoop(sf::RenderWindow *window)
         case sf::Event::MouseButtonPressed:
             cout << "position en x souris : " << event.mouseButton.x << endl;
             cout << "position en y souris : " << event.mouseButton.y << endl;
-            //ia.ordiJoue(moi);
 
+			//res = moi.joueurJoue(ia.plat, tmp.plat, event.mouseButton.x, event.mouseButton.y);
+            
+			ia.ordiJoue(moi.plat);
+			
             ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
             this->ia.plat.printNbBateaux();
 
             //ia.placeBateauIA();
             //ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
-            //ia.plat.printCheckerboard();
+            ia.plat.printCheckerboard();
             //ia.plat.updateCheckerboard(ia.getcheckerBoard());
             //ia.printCheckerboard();
             break;
