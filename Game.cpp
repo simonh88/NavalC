@@ -24,7 +24,7 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
 
 	tmp.plat.updateCheckerboard(tmp.plat.newBoard());
 	tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
-	tmp.plat.setPosition(50, 150);
+	tmp.plat.setPosition(450, 50);
 }
 /*Destructor*/
 Game::~Game()
@@ -93,8 +93,8 @@ void Game::startMenu(sf::RenderWindow *window)
 void Game::placementLoop(sf::RenderWindow *window)
 {
 	/* Au cas ou c'est modif (recommencer une partie)*/
-	if (tmp.plat.getPosition().x != 50)
-		tmp.plat.setPosition(50, 150);
+	/*if (tmp.plat.getPosition().x != 50)
+		tmp.plat.setPosition(50, 150);*/
 	while (window->pollEvent(event))
 	{
 		switch (event.type)
@@ -112,7 +112,7 @@ void Game::placementLoop(sf::RenderWindow *window)
 				ia.placeBateauIA(); // Placement des bateaux de l'ia en secret
 				ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				/* TEMPORAIRE IA VS IA
-				/*moi.placeBateauIA();
+				moi.placeBateauIA();
 				moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				*/
 				placementMenu = false;
@@ -159,12 +159,14 @@ void Game::mainLoop(sf::RenderWindow *window)
 
 			if (res == true) {
 				ia.printCheckerboard();
-				
+
 				ia.ordiJoue(&moi.plat);
-				moi.printCheckerboard();
+				tmp.printCheckerboard();
 				ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
 				this->ia.plat.printNbBateaux();
-
+        tmp.plat.updateCheckerboard(tmp.getcheckerBoard());
+        ia.plat.updateCheckerboard(ia.getcheckerBoard());
+        moi.plat.updateCheckerboard(moi.getcheckerBoard());
 				//ia.placeBateauIA();
 				//ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 			   // ia.plat.printCheckerboard();
@@ -181,7 +183,7 @@ void Game::mainLoop(sf::RenderWindow *window)
 	blitText.tailleComposants(window);
 	blitText.blitStaticText(window);
 	window->draw(moi.plat);
-	window->draw(ia.plat);
+	window->draw(tmp.plat);
 	//window->draw(ia.plat);
 	window->display();
 }

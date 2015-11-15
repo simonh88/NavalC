@@ -30,6 +30,9 @@ class Game
         Joueur moi;
         Joueur ia;
         Joueur tmp; //utiliser pour le choix des bateaux et pour cacher l'affichage de l'ordi
+        /*Board* pBmoi;
+        Board* pBia;
+        Board* pBtmp;*/
         unsigned int nbRock;
         int pos;  //Permet de se repérer dans le startingMenu pour naviguer entre les sous menus
         bool continuingStartMenu;  //Permet de savoir si on a besoin d'afficher le startmenu
