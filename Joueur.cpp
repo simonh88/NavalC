@@ -219,10 +219,15 @@ void Joueur::placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock)   // 
 
 	std::vector<int> tab = tabOfBoat;
 	tabSize = tab.size();
+	int rx;
+	int ry;
+	for (int j = 0; j < nbRock; j++){
+		rx = rand() % 10; // le jeux fait 10 sur 10, donc  1 case, un nombre
+		ry = rand() % 10; // le jeux fait 10 sur 10, donc  1 case, un nombre
+		this->plat.setBoard(rx, ry, 1);
+		
 
-	/*for (int j = 0; j < nbRock; j++){
-
-	}*/
+	}
 
 	for (int i = 0; i < tabSize; i++)
 	{
