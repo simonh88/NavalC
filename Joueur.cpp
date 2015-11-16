@@ -176,11 +176,12 @@ bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) { // x, y les coor
 				return true;
 				break;
 			case 1: // rocher
-
-				tmp->setBoard(cx, cy, 1); // place sur le board afficher un rocher
-										  //passe son tour, donc l'ordi joue deux fois d'affiler
-				this->strat = 3;
-				return true;
+				if (tmp->getBoard(cx, cy) == 1)return false;
+				else {
+					tmp->setBoard(cx, cy, 1); // place sur le board afficher un rocher										  //passe son tour, donc l'ordi joue deux fois d'affiler
+					this->strat = 3;
+					return true;
+				}
 				break;
 			case 2: // touche bateau
 				adv->setBoard(cx, cy, 4);
@@ -224,7 +225,7 @@ void Joueur::placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock)   // 
 	for (int j = 0; j < nbRock; j++){
 		rx = rand() % 10; // le jeux fait 10 sur 10, donc  1 case, un nombre
 		ry = rand() % 10; // le jeux fait 10 sur 10, donc  1 case, un nombre
-		this->plat.setBoard(rx, ry, 1);
+		this->plat.setBoard(rx, ry, 1);	
 		
 
 	}
@@ -592,7 +593,7 @@ void Joueur::ordiJoue(Board* adv)
 				}
 				else if (CheckPlace(lastx, lasty - 1, *adv) != 3 && !isIn(dejaJouer, lastx, lasty - 1))
 				{
-					this->dejaJouer.push_back(std::make_pair(lastx, lasty - 1));
+					this->dejaJouer.push_back(std::make_pair(lastx, lasty-1));
 					aa = CheckPlace(lastx, lasty - 1, *adv);
 					if (aa == 2) {
 						neso = 1; // ouest
@@ -757,6 +758,7 @@ void Joueur::ordiJoue(Board* adv)
 				break;
 			case 2:
 				this->touche.push_back(std::make_pair(x, y)); //si un bateau, ajouter au bateau touche
+				this->dejaJouer.push_back(std::make_pair(x, y));
 				adv->setBoard(x, y, 4);
 				break;
 			}
