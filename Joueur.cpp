@@ -134,8 +134,8 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
 	return false;
 }
 
-
-bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) { // x, y les coordonné de la souris sans direct, board tmp sera l'affichage du board adverse
+// x, y les coordonné de la souris sans direct, board tmp sera l'affichage du board adverse
+bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) {
 
 
 	x = x - 450; // valeurs de la premier case est de 450, on simplifie en mettant x a zero

@@ -240,6 +240,7 @@ void Game::mainLoop(sf::RenderWindow *window)
 	window->clear(sf::Color::Black);
 	blitText.tailleComposants(window);
 	blitText.blitStaticText(window);
+	blitText.blitStatistics(window);
 	window->draw(moi.plat);
 	window->draw(tmp.plat);
 	//window->draw(ia.plat);

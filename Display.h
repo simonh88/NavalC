@@ -20,6 +20,7 @@ public:
     bool flashingText(sf::RenderWindow *window);
     void opacitychange();
     bool textPlacementLoop(sf::RenderWindow *window);
+    void blitStatistics(sf::RenderWindow *window);
 
 private:
     sf::Font font;
