@@ -22,7 +22,7 @@ class Joueur
         Joueur(int ia);
         virtual ~Joueur();
 		bool placeBateauH(sf::Vector2i coord, bool verticale, int longueur);
-		void placeBateauIA();
+		void placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock);
 		int CheckPlace(int x, int y, Board b);
 		void setDifficulty(int x);
 		void ordiJoue(Board* adversaire);

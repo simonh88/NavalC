@@ -168,7 +168,9 @@ void Game::placementLoop(sf::RenderWindow *window)
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 			{
-				ia.placeBateauIA(); // Placement des bateaux de l'ia en secret
+        // Placement des bateaux de l'ia en secret
+        //moi.plat.printBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard()));
+				ia.placeBateauIA(this->moi.plat.nbBateaux(this->moi.plat.getCheckerboard()), maRecup.getNbRock());
 				ia.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				/* TEMPORAIRE IA VS IA
 				moi.placeBateauIA();
@@ -221,7 +223,7 @@ void Game::mainLoop(sf::RenderWindow *window)
 
 				this->ia.ordiJoue(&moi.plat);
 				tmp.plat.printCheckerboard();
-				ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
+				//ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
 				this->ia.plat.printNbBateaux();
 				moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);

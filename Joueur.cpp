@@ -202,23 +202,28 @@ bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) { // x, y les coor
 		this->strat = 1;
 
 	}
+	return true;
 }
 
 /* Du coup, ici, rajouter peut être un param qui contient le vector des bateaux */
-void Joueur::placeBateauIA()   // placement bateau de l'ia
+void Joueur::placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock)   // placement bateau de l'ia
 {
 	/* On pourra lire le nombre de bateaux que le joueur à placer
 	* et par la suite utiliser le tableau qui contient tout les tailles.
 	*/
+	std::cout << nbRock << std::endl;
 	int x;
-	int y;
+	int a;
+	int y, tabSize;
 	bool verticale;
 	//int nbBateau = 5; // 5 bateau de 2;3;3;4;5 case
-	int tab[5] = { 2,3,3,4,5 };
-	int a;
+	//int tab[5] = { 2,3,3,4,5 };
+
+	std::vector<int> tab = tabOfBoat;
+  tabSize = tab.size();
 
 	// boucle de 5 bateaux
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < tabSize; i++)
 	{
 		a = rand() % 2;
 		verticale = (a == 0); // sens bateau random
