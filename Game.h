@@ -39,6 +39,7 @@ class Game
         bool continuingStartMenu;  //Permet de savoir si on a besoin d'afficher le startmenu
         bool placementMenu;  // Permet de savoir si on a besoin d'afficher le placementMenu
         bool difficultyMenu;
+        int turn;
 };
 
 #endif // GAME_H

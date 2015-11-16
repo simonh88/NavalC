@@ -6,7 +6,7 @@ using std::endl;
 
 
 /*Constructeur utilisant la surcharge pour init pos et les deux booleens */
-Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false), difficultyMenu(false)
+Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false), difficultyMenu(false), turn(0)
 {
 	maRecup.fillCheckerboard("config.txt");
 	nbRock = maRecup.getNbRock();
@@ -71,7 +71,7 @@ void Game::startMenu(sf::RenderWindow *window)
 					//A completer
 					continuingStartMenu = false;
 					difficultyMenu = true;
-					cout << "DIFFICULTY" << endl;
+					//cout << "DIFFICULTY" << endl;
 					break;
 				}
 			}
@@ -219,12 +219,12 @@ void Game::mainLoop(sf::RenderWindow *window)
 			res = moi.joueurJoue(&ia.plat, &tmp.plat, event.mouseButton.x, event.mouseButton.y);
 
 			if (res == true) {
-				ia.plat.printCheckerboard();
+				turn += 1;
 
 				this->ia.ordiJoue(&moi.plat);
-				tmp.plat.printCheckerboard();
+				//tmp.plat.printCheckerboard();
 				//ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
-				this->ia.plat.printNbBateaux();
+				//this->ia.plat.printNbBateaux();
 				moi.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				tmp.plat.loadTileMap("img/tileSet.png", sf::Vector2u(30, 30), 10, 10);
 				//ia.placeBateauIA();

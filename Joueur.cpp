@@ -211,7 +211,7 @@ void Joueur::placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock)   // 
 	/* On pourra lire le nombre de bateaux que le joueur à placer
 	* et par la suite utiliser le tableau qui contient tout les tailles.
 	*/
-	std::cout << nbRock << std::endl;
+	//std::cout << nbRock << std::endl;
 	int x;
 	int a;
 	int y, tabSize;
