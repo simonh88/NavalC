@@ -218,11 +218,11 @@ void Joueur::placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock)   // 
 	bool verticale;
 
 	std::vector<int> tab = tabOfBoat;
-  tabSize = tab.size();
+	tabSize = tab.size();
 
-  /*for (int j = 0; j < nbRock; j++){
+	/*for (int j = 0; j < nbRock; j++){
 
-  }*/
+	}*/
 
 	for (int i = 0; i < tabSize; i++)
 	{
@@ -541,7 +541,7 @@ void Joueur::ordiJoue(Board* adv)
 					this->dejaJouer.push_back(std::make_pair(lastx + 1, lasty));
 					aa = CheckPlace(lastx + 1, lasty, *adv);
 					if (aa == 2) {
-						neso = 1; // est
+						neso = 2; // sud
 						this->touche.push_back(std::make_pair(lastx + 1, lasty)); //si un bateau, ajouter au bateau touche
 						adv->setBoard(lastx + 1, lasty, 4);
 					}
@@ -558,7 +558,7 @@ void Joueur::ordiJoue(Board* adv)
 					this->dejaJouer.push_back(std::make_pair(lastx, lasty + 1));
 					aa = CheckPlace(lastx, lasty + 1, *adv);
 					if (aa == 2) {
-						neso = 3; // sud
+						neso = 3; // est
 						this->touche.push_back(std::make_pair(lastx, lasty + 1)); //si un bateau, ajouter au bateau touche
 						adv->setBoard(lastx, lasty + 1, 4);
 					}
@@ -574,7 +574,7 @@ void Joueur::ordiJoue(Board* adv)
 					this->dejaJouer.push_back(std::make_pair(lastx - 1, lasty));
 					aa = CheckPlace(lastx - 1, lasty, *adv);
 					if (aa == 2) {
-						neso = 4; // ouest
+						neso = 4; // nord
 						this->touche.push_back(std::make_pair(lastx - 1, lasty)); //si un bateau, ajouter au bateau touche
 						adv->setBoard(lastx - 1, lasty, 4);
 					}
@@ -590,7 +590,7 @@ void Joueur::ordiJoue(Board* adv)
 					this->dejaJouer.push_back(std::make_pair(lastx, lasty - 1));
 					aa = CheckPlace(lastx, lasty - 1, *adv);
 					if (aa == 2) {
-						neso = 1; // nord
+						neso = 1; // ouest
 						this->touche.push_back(std::make_pair(lastx, lasty - 1)); //si un bateau, ajouter au bateau touche
 						adv->setBoard(lastx, lasty - 1, 4);
 					}
@@ -608,87 +608,100 @@ void Joueur::ordiJoue(Board* adv)
 
 			}
 			else { // si on connais la direction "neso"
+				if (lastx + 1 > 9 || lasty + 1 > 9 || lastx - 1 < 0 || lasty - 1 < 0) {
+					this->strat = 1;
+					this->ordiJoue(adv);
+				}
+				else {
+					switch (neso) {
+					case 1://sud
 
-				switch (neso) {
-				case 1://Nord
+						if (CheckPlace(lastx, lasty - 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty - 1)) {
+							this->touche.push_back(std::make_pair(lastx, lasty - 1)); //si un bateau, ajouter au bateau touche
 
-					if (CheckPlace(lastx, lasty - 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty - 1)) {
-						this->touche.push_back(std::make_pair(lastx, lasty - 1)); //si un bateau, ajouter au bateau touche
-
-						adv->setBoard(lastx, lasty - 1, 4);
-					}
-					else {
-						if (CheckPlace(lastx, lasty - 1, *adv) == 1 && !isIn(dejaJouer, lastx, lasty - 1)) {
-							strat = 3;
-							adv->setBoard(lastx, lasty - 1, 5); 							neso = 0;
-
+							adv->setBoard(lastx, lasty - 1, 4);
 						}
 						else {
-							adv->setBoard(lastx, lasty - 1, 5); 							strat = 1;
-							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-						}
-					}
-					this->dejaJouer.push_back(std::make_pair(lastx, lasty - 1));
-					break;
-				case 2: // est
+							if (CheckPlace(lastx, lasty - 1, *adv) == 1 && !isIn(dejaJouer, lastx, lasty - 1)) {
+								strat = 3;
+								adv->setBoard(lastx, lasty - 1, 5); 							neso = 0;
 
-					if (CheckPlace(lastx + 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx + 1, lasty)) {
-						this->touche.push_back(std::make_pair(lastx + 1, lasty)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx + 1, lasty, 4);
-					}
-					else {
-						if (CheckPlace(lastx + 1, lasty, *adv) == 1 && !isIn(dejaJouer, lastx + 1, lasty)) { // caillou
-							strat = 3;
-							adv->setBoard(lastx + 1, lasty, 5); 							neso = 0;
+							}
+							else {
+								adv->setBoard(lastx, lasty - 1, 5); 							strat = 1;
+								neso = 0; // on a atteind un bout du bateau, on test l'autre bout
+								if (CheckPlace(lastx, lasty - 1, *adv) == 4)adv->setBoard(lastx, lasty - 1, 4);
+							}
+						}
+						this->dejaJouer.push_back(std::make_pair(lastx, lasty - 1));
+						break;
+					case 2: // sud
+
+						if (CheckPlace(lastx + 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx + 1, lasty)) {
+							this->touche.push_back(std::make_pair(lastx + 1, lasty)); //si un bateau, ajouter au bateau touche
+							adv->setBoard(lastx + 1, lasty, 4);
 						}
 						else {
-							// a l'eau
-							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-							adv->setBoard(lastx + 1, lasty, 5); 							strat = 1;
-						}
-					}
-					this->dejaJouer.push_back(std::make_pair(lastx + 1, lasty));
-					break;
-				case 3: // sud
+							if (CheckPlace(lastx + 1, lasty, *adv) == 1 && !isIn(dejaJouer, lastx + 1, lasty)) { // caillou
+								strat = 3;
+								adv->setBoard(lastx + 1, lasty, 5); 							neso = 0;
+							}
+							else {
+								// a l'eau
+								neso = 0; // on a atteind un bout du bateau, on test l'autre bout
+								adv->setBoard(lastx + 1, lasty, 5); 							strat = 1;
+								if (CheckPlace(lastx + 1, lasty, *adv) == 4) {
+									adv->setBoard(lastx + 1, lasty, 4);
+								}
 
-					if (CheckPlace(lastx, lasty + 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty + 1)) {
-						this->touche.push_back(std::make_pair(lastx, lasty + 1)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx, lasty + 1, 4);
-					}
-					else {
-						if (CheckPlace(lastx, lasty + 1, *adv) == 1 && !isIn(dejaJouer, lastx, lasty + 1)) {
-							adv->setBoard(lastx, lasty + 1, 5); 							strat = 3;
-							neso = 0;
+
+							}
+						}
+						this->dejaJouer.push_back(std::make_pair(lastx + 1, lasty));
+						break;
+					case 3: // est
+
+						if (CheckPlace(lastx, lasty + 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty + 1)) {
+							this->touche.push_back(std::make_pair(lastx, lasty + 1)); //si un bateau, ajouter au bateau touche
+							adv->setBoard(lastx, lasty + 1, 4);
 						}
 						else {
-							// a l'eau
-							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-							adv->setBoard(lastx, lasty + 1, 5); 							strat = 1;
+							if (CheckPlace(lastx, lasty + 1, *adv) == 1 && !isIn(dejaJouer, lastx, lasty + 1)) {
+								adv->setBoard(lastx, lasty + 1, 5); 							strat = 3;
+								neso = 0;
+							}
+							else {
+								// a l'eau
+								neso = 0;
+								adv->setBoard(lastx, lasty + 1, 5); 							strat = 1;
+								if (CheckPlace(lastx, lasty + 1, *adv) == 4)adv->setBoard(lastx, lasty + 1, 4);
+							}
 						}
-					}
-					this->dejaJouer.push_back(std::make_pair(lastx, lasty + 1));
-					break;
-				case 4: // ouest
-				default:
+						this->dejaJouer.push_back(std::make_pair(lastx, lasty + 1));
+						break;
+					case 4: // ouest
+					default:
 
-					if (CheckPlace(lastx - 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx - 1, lasty)) {
-						this->touche.push_back(std::make_pair(lastx - 1, lasty)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx - 1, lasty, 4);
-					}
-					else {
-						if (CheckPlace(lastx - 1, lasty, *adv) == 1 && !isIn(dejaJouer, lastx - 1, lasty)) {
-							adv->setBoard(lastx - 1, lasty, 5); 							strat = 3;
-							neso = 0;
+						if (CheckPlace(lastx - 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx - 1, lasty)) {
+							this->touche.push_back(std::make_pair(lastx - 1, lasty)); //si un bateau, ajouter au bateau touche
+							adv->setBoard(lastx - 1, lasty, 4);
 						}
 						else {
-							// a l'eau
-							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-							adv->setBoard(lastx - 1, lasty, 5); 							strat = 1;
+							if (CheckPlace(lastx - 1, lasty, *adv) == 1 && !isIn(dejaJouer, lastx - 1, lasty)) {
+								adv->setBoard(lastx - 1, lasty, 5); 							strat = 3;
+								neso = 0;
+							}
+							else {
+								// a l'eau
+								neso = 0; // on a atteind un bout du bateau, on test l'autre bout
+								adv->setBoard(lastx - 1, lasty, 5); 							strat = 1;
+								if (CheckPlace(lastx - 1, lasty, *adv) == 4)adv->setBoard(lastx - 1, lasty, 4);
+							}
 						}
-					}
-					this->dejaJouer.push_back(std::make_pair(lastx - 1, lasty));
-					break;
+						this->dejaJouer.push_back(std::make_pair(lastx - 1, lasty));
+						break;
 
+					}
 				}
 			}
 			/*std::cout << "lx : " << lastx << "; ly : " << lasty << std::endl;
