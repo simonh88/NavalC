@@ -164,6 +164,7 @@ void Game::placementLoop(sf::RenderWindow *window)
 		case sf::Event::KeyPressed:
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
+        placementMenu = false;
 				continuingStartMenu = true; // retour au menu
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
