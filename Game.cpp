@@ -6,7 +6,7 @@ using std::endl;
 
 
 /*Constructeur utilisant la surcharge pour init pos et les deux booleens */
-Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false)
+Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false), difficultyMenu(false)
 {
 	maRecup.fillCheckerboard("config.txt");
 	nbRock = maRecup.getNbRock();
@@ -69,6 +69,8 @@ void Game::startMenu(sf::RenderWindow *window)
 					break;
 				case 1:
 					//A completer
+					continuingStartMenu = false;
+					difficultyMenu = true;
 					cout << "DIFFICULTY" << endl;
 					break;
 				}
@@ -85,10 +87,67 @@ void Game::startMenu(sf::RenderWindow *window)
 		}
 	}
 	window->clear(sf::Color::Black);
-	blitText.textStartMenu(window, pos);
+	blitText.StartMenuAndDifficulty(window, pos, true);
 	blitText.flashingText(window);
 	window->display();
 }
+/* Fonction gérant le niveau de difficulté de l'ia */
+void Game::difficultyLoop(sf::RenderWindow *window){
+  while (window->pollEvent(event))
+	{
+    switch (event.type)
+		{
+		case sf::Event::Closed:
+      window->close();
+      break;
+    case sf::Event::KeyPressed:
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        continuingStartMenu = true;
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				if (pos == 2)
+					pos = 0;
+				else
+					pos++;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				if (pos == 0)
+					pos = 2;
+				else
+					pos--;
+			}
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//"Enter"
+			{
+				switch (pos)
+				{
+				case 0:
+          ia.setDifficulty(1);
+          difficultyMenu = false;
+          continuingStartMenu = true;
+          break;
+        case 1:
+          ia.setDifficulty(2);
+          difficultyMenu = false;
+          continuingStartMenu = true;
+          break;
+        case 2:
+          ia.setDifficulty(3);
+          difficultyMenu = false;
+          continuingStartMenu = true;
+          break;
+				}
+      }
+      default:
+        break;
+    }
+  }
+  window->clear(sf::Color::Black);
+  blitText.StartMenuAndDifficulty(window, pos, false);
+	blitText.flashingText(window);
+  window->display();
+}
+
 /*Fonction gérant le moment ou il faut placer les bateaux*/
 void Game::placementLoop(sf::RenderWindow *window)
 {
@@ -194,7 +253,9 @@ void Game::generalLoop(sf::RenderWindow *window)
 		startMenu(window);
 	else if (placementMenu)
 		placementLoop(window);
-	else
+	else if (difficultyMenu)
+    difficultyLoop(window);
+  else
 		mainLoop(window);
 }
 

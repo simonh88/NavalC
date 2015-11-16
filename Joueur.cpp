@@ -21,8 +21,6 @@ Joueur::~Joueur()
 }
 
 
-
-
 /* Getteur du checkerboard */
 std::vector<std::vector<int> > Joueur::getcheckerBoard()
 {

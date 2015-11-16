@@ -107,12 +107,17 @@ bool Display::textPlacementLoop(sf::RenderWindow *window)
     return true;
 }
 /*Affichage du texte et des sprites du StartMenu*/
-bool Display::textStartMenu(sf::RenderWindow *window, int pos)
+bool Display::StartMenuAndDifficulty(sf::RenderWindow *window, int pos, bool isStartMenu)
 {
     if (!font.loadFromFile("arial.ttf"))
         return false;
-    if (!textureBG.loadFromFile("img/background_start_menu.png", sf::IntRect(0, 0, 800, 600)))
+    if(isStartMenu){
+      if (!textureBG.loadFromFile("img/background_start_menu.png", sf::IntRect(0, 0, 800, 600)))
         return false;
+    }else{
+      if (!textureBG.loadFromFile("img/boatDiff.png", sf::IntRect(0, 0, 800, 600)))
+        return false;
+    }
     if (!textureKeyUp.loadFromFile("img/keyUp.png", sf::IntRect(0, 0, 24, 24)))
         return false;
     if (!textureKeyDown.loadFromFile("img/keyDown.png", sf::IntRect(0, 0, 24, 24)))
@@ -125,20 +130,37 @@ bool Display::textStartMenu(sf::RenderWindow *window, int pos)
     window->draw(spriteBG);
     window->draw(spriteKeyUp);
     window->draw(spriteKeyDown);
-    window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true, false));
-
-    if (pos == 0)
-        window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false, false));
+    if (isStartMenu)
+      window->draw(setStaticText("Welcome to the Navalbattle", 50, sf::Vector2u(80,30), true, false));
     else
-        window->draw(setStaticText("Start a game", 25, sf::Vector2u(300, 250), false, false));
-    if (pos == 1)
-        window->draw(setStaticText("Difficulty", 30, sf::Vector2u(300, 300), false, false));
-    else
-        window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false, false));
-    if (pos == 2)
-        window->draw(setStaticText("Rules", 30, sf::Vector2u(300, 350), false, false));
-    else
-        window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false, false));
+      window->draw(setStaticText("Choose your difficulty", 50, sf::Vector2u(80,30), true, false));
+    if(isStartMenu){
+      if (pos == 0)
+          window->draw(setStaticText("Start a game", 30, sf::Vector2u(300, 250), false, false));
+      else
+          window->draw(setStaticText("Start a game", 25, sf::Vector2u(300, 250), false, false));
+      if (pos == 1)
+          window->draw(setStaticText("Difficulty", 30, sf::Vector2u(300, 300), false, false));
+      else
+          window->draw(setStaticText("Difficulty", 25, sf::Vector2u(300, 300), false, false));
+      if (pos == 2)
+          window->draw(setStaticText("Rules", 30, sf::Vector2u(300, 350), false, false));
+      else
+          window->draw(setStaticText("Rules", 25, sf::Vector2u(300, 350), false, false));
+    }else{
+      if (pos == 0)
+          window->draw(setStaticText("EASY", 30, sf::Vector2u(300, 250), false, false));
+      else
+          window->draw(setStaticText("EASY", 25, sf::Vector2u(300, 250), false, false));
+      if (pos == 1)
+          window->draw(setStaticText("MEDIUM", 30, sf::Vector2u(300, 300), false, false));
+      else
+          window->draw(setStaticText("MEDIUM", 25, sf::Vector2u(300, 300), false, false));
+      if (pos == 2)
+          window->draw(setStaticText("HARD", 30, sf::Vector2u(300, 350), false, false));
+      else
+          window->draw(setStaticText("HARD", 25, sf::Vector2u(300, 350), false, false));
+    }
 
     return true;
 }

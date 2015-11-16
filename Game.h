@@ -22,6 +22,7 @@ class Game
         void mainLoop(sf::RenderWindow *window);
         void generalLoop(sf::RenderWindow *window);
         void placementLoop(sf::RenderWindow *window);
+        void difficultyLoop(sf::RenderWindow *window);
     protected:
     private:
         sf::Event event;
@@ -37,6 +38,7 @@ class Game
         int pos;  //Permet de se repérer dans le startingMenu pour naviguer entre les sous menus
         bool continuingStartMenu;  //Permet de savoir si on a besoin d'afficher le startmenu
         bool placementMenu;  // Permet de savoir si on a besoin d'afficher le placementMenu
+        bool difficultyMenu;
 };
 
 #endif // GAME_H
