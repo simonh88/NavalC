@@ -7,8 +7,8 @@ Joueur::Joueur() : row(10, 0), checkerBoard(10, row), strat(1)  // default Humai
 }
 
 /*Constructor avec un param x pour défénir
- * la difficulté de l'ordi
- */
+* la difficulté de l'ordi
+*/
 Joueur::Joueur(int x) // 1;2;3 = ordi, 0 = humain
 {
 	this->ia = x;
@@ -29,45 +29,45 @@ std::vector<std::vector<int> > Joueur::getcheckerBoard()
 
 /*int Joueur::placeBateauH(sf::Vector2i coord, bool verticale, int boatLength )
 {
-	// placement bateau humain
-	int x(coord.x - 50);
-	int y(coord.y - 50);
-	int tileSize(30);
-	int xTail, yTail, pos; //back coord of the boat
+// placement bateau humain
+int x(coord.x - 50);
+int y(coord.y - 50);
+int tileSize(30);
+int xTail, yTail, pos; //back coord of the boat
 
-	if(verticale)
-	{
-		xTail = x + tileSize*(boatLength - 1);
-		pos = 3;
-	}
-	else
-	{
-		yTail = y + tileSize*(boatLength - 1);
-		pos = 2;
-	}
-	if (!(x >= 0 && y >= 0 && x < 300 && y < 300))
-	{
-		return -1; //click outside of the checkerBoard
-	}
-	if (!(xTail >= 0 && yTail >= 0 && xTail < 300 && yTail < 300))
-	{
-		return 0; // boat is too big, he exceed the size of checkerBoard
-	}
+if(verticale)
+{
+xTail = x + tileSize*(boatLength - 1);
+pos = 3;
+}
+else
+{
+yTail = y + tileSize*(boatLength - 1);
+pos = 2;
+}
+if (!(x >= 0 && y >= 0 && x < 300 && y < 300))
+{
+return -1; //click outside of the checkerBoard
+}
+if (!(xTail >= 0 && yTail >= 0 && xTail < 300 && yTail < 300))
+{
+return 0; // boat is too big, he exceed the size of checkerBoard
+}
 
-	//test if boat is in the checkerboard
+//test if boat is in the checkerboard
 
-	if (x >= 0 && y >= 0 && x < 300 && y < 300)
-	{
-		x = x / 30;
-		y = y / 30;
-		for( int i = 0; i<boatLength; i++)
-		{
-			this->checkerBoard[x][y] = pos;
-			if(verticale)x++;
-			else y++;
-		}
-	}
-	return 1; // No problems
+if (x >= 0 && y >= 0 && x < 300 && y < 300)
+{
+x = x / 30;
+y = y / 30;
+for( int i = 0; i<boatLength; i++)
+{
+this->checkerBoard[x][y] = pos;
+if(verticale)x++;
+else y++;
+}
+}
+return 1; // No problems
 }
 */
 /*Affichage du checkerboard pour debug */
@@ -134,86 +134,82 @@ bool Joueur::placeBateauH(sf::Vector2i coordmouse, bool verticale, int longueur)
 	return false;
 }
 
-// x, y les coordonné de la souris sans direct, board tmp sera l'affichage du board adverse
-bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) {
+
+bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) { // x, y les coordonné de la souris sans direct, board tmp sera l'affichage du board adverse
+
+	if (this->strat != 3) { // si le joueur ne doit pas passer son tour
+
+		x = x - 450; // valeurs de la premier case est de 450, on simplifie en mettant x a zero
+		y = y - 50; // valeurs de la premier case est de 50, on simplifie en mettant y a zero
+		int cx;
+		int cy;
+
+		if (x >= 0 && y >= 0 && x < 399 && y < 299) {
+			if (x <= 299) cy = 9;
+			if (x <= 269) cy = 8;
+			if (x <= 239) cy = 7;
+			if (x <= 209) cy = 6;
+			if (x <= 179) cy = 5;
+			if (x <= 149) cy = 4;
+			if (x <= 119) cy = 3;
+			if (x <= 89) cy = 2;
+			if (x <= 59) cy = 1;
+			if (x <= 29) cy = 0; // donne la  case x dans le tableau adverse
+
+			if (y <= 299) cx = 9;
+			if (y <= 269) cx = 8;
+			if (y <= 239) cx = 7;
+			if (y <= 209) cx = 6;
+			if (y <= 179) cx = 5;
+			if (y <= 149) cx = 4;
+			if (y <= 119) cx = 3;
+			if (y <= 89) cx = 2;
+			if (y <= 59) cx = 1;
+			if (y <= 29) cx = 0; // donne la case y dans le tableau adverse;
+
+			int a = CheckPlace(cx, cy, *adv);
+			std::cout << a;
+			switch (a) {
+			case 0: // a l'eau
+				adv->setBoard(cx, cy, 5);
+				tmp->setBoard(cx, cy, 5); // place sur le board afficher une croix bleu
+				return true;
+				break;
+			case 1: // rocher
+
+				tmp->setBoard(cx, cy, 1); // place sur le board afficher un rocher
+										  //passe son tour, donc l'ordi joue deux fois d'affiler
+				this->strat = 3;
+				return true;
+				break;
+			case 2: // touche bateau
+				adv->setBoard(cx, cy, 4);
+				tmp->setBoard(cx, cy, 4); // place sur le board afficher, une croix rouge representant la bateau touché
+				return true;
+			case 3: // zone deja touché, deja joué, ( où hors tableau si la verif a bugé)
+			default:
+				return false;
+				break;
+			}
 
 
-	x = x - 450; // valeurs de la premier case est de 450, on simplifie en mettant x a zero
-	y = y - 50; // valeurs de la premier case est de 50, on simplifie en mettant y a zero
-	int cx;
-	int cy;
-
-	if (x >= 0 && y >= 0 && x < 399 && y < 299) {
-		if (x <= 299) cy = 9;
-		if (x <= 269) cy = 8;
-		if (x <= 239) cy = 7;
-		if (x <= 209) cy = 6;
-		if (x <= 179) cy = 5;
-		if (x <= 149) cy = 4;
-		if (x <= 119) cy = 3;
-		if (x <= 89) cy = 2;
-		if (x <= 59) cy = 1;
-		if (x <= 29) cy = 0; // donne la  case x dans le tableau adverse
-
-		if (y <= 299) cx = 9;
-		if (y <= 269) cx = 8;
-		if (y <= 239) cx = 7;
-		if (y <= 209) cx = 6;
-		if (y <= 179) cx = 5;
-		if (y <= 149) cx = 4;
-		if (y <= 119) cx = 3;
-		if (y <= 89) cx = 2;
-		if (y <= 59) cx = 1;
-		if (y <= 29) cx = 0; // donne la case y dans le tableau adverse;
-
-		int a = CheckPlace(cx, cy, *adv);
-		std::cout << a;
-		switch (a) {
-		case 0: // a l'eau
-			adv->setBoard(cx, cy, 5);
-			tmp->setBoard(cx, cy, 5); // place sur le board afficher une croix bleu
-			return true;
-			break;
-		case 1: // rocher
-			//TODO faire passer son tour
-			tmp->setBoard(cx, cy, 1); // place sur le board afficher un rocher
-			return true;
-			break;
-		case 2: // touche bateau
-			adv->setBoard(cx, cy, 4);
-			tmp->setBoard(cx, cy, 4); // place sur le board afficher, une croix rouge representant la bateau touché
-			return true;
-		case 3: // zone deja touché, deja joué, ( où hors tableau si la verif a bugé)
-		default:
-			return false;
-			break;
 		}
-
-
+		else {
+			return false; // le clique n'était pas dans le tableau;
+		}
 	}
 	else {
-		return false; // le clique n'était pas dans le tableau;
+		this->strat = 1;
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Du coup, ici, rajouter peut être un param qui contient le vector des bateaux */
 void Joueur::placeBateauIA()   // placement bateau de l'ia
 {
 	/* On pourra lire le nombre de bateaux que le joueur à placer
-	 * et par la suite utiliser le tableau qui contient tout les tailles.
-	 */
+	* et par la suite utiliser le tableau qui contient tout les tailles.
+	*/
 	int x;
 	int y;
 	bool verticale;
@@ -341,11 +337,11 @@ void Joueur::ordiJoue(Board* adv)
 					this->First.push_back(std::make_pair(x, y)); // ajoute la case comme premiere case touche
 					this->strat = 2; // on passe en mode traque afin de detruire le reste du bateau
 
-					adv->setBoard(x, y, 4); // TODO img croix rouge pour indiqué bateau touché
+					adv->setBoard(x, y, 4);
 				}
 				else
 				{
-					adv->setBoard(x, y, 5); // TODO img croix bleu                }
+					adv->setBoard(x, y, 5);
 				}
 
 			}
@@ -366,16 +362,15 @@ void Joueur::ordiJoue(Board* adv)
 					this->touche.push_back(std::make_pair(x, y)); //si un bateau, ajouter au bateau touche
 					this->First.push_back(std::make_pair(x, y));
 					this->strat = 2; // on passe en mode traque afin de detruire le reste du bateau
-					adv->setBoard(x, y, 4); // TODO img croix rouge pour indiqué bateau touché
+					adv->setBoard(x, y, 4);
 				}
 				else
 				{
-					adv->setBoard(x, y, 5); // TODO img croix bleu				}
-
+					adv->setBoard(x, y, 5);
 				}
 
 				break; // fin chasse
-	//-------------------------------------------------
+					   //-------------------------------------------------
 		case 2: //debut traque
 
 
@@ -386,29 +381,26 @@ void Joueur::ordiJoue(Board* adv)
 			{
 				this->touche.push_back(std::make_pair(lastx + 1, lasty));
 				this->dejaJouer.push_back(std::make_pair(lastx + 1, lasty));
-				adv->setBoard(lastx + 1, lasty, 4); // TODO img croix rouge pour indiqué bateau touché
-
+				adv->setBoard(lastx + 1, lasty, 4);
 			}
 			else if (CheckPlace(lastx, lasty + 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty + 1))
 			{
 				this->touche.push_back(std::make_pair(lastx, lasty + 1));
 				this->dejaJouer.push_back(std::make_pair(lastx, lasty + 1));
-				adv->setBoard(lastx, lasty + 1, 4); // TODO img croix rouge pour indiqué bateau touché
-
+				adv->setBoard(lastx, lasty + 1, 4);
 
 			}
 			else if (CheckPlace(lastx - 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx - 1, lasty))
 			{
 				this->touche.push_back(std::make_pair(lastx - 1, lasty));
 				this->dejaJouer.push_back(std::make_pair(lastx - 1, lasty));
-				adv->setBoard(lastx - 1, lasty, 4); // TODO img croix rouge pour indiqué bateau touché
-
+				adv->setBoard(lastx - 1, lasty, 4);
 			}
 			else if (CheckPlace(lastx, lasty - 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty - 1))
 			{
 				this->touche.push_back(std::make_pair(lastx, lasty - 1));
 				this->dejaJouer.push_back(std::make_pair(lastx, lasty - 1));
-				adv->setBoard(lastx, lasty - 1, 4); // TODO img croix rouge pour indiqué bateau touché
+				adv->setBoard(lastx, lasty - 1, 4);
 			}
 			else // on test avec la case de depart pour voir si l'on a pas manqué des case avant
 			{
@@ -419,28 +411,25 @@ void Joueur::ordiJoue(Board* adv)
 				{
 					this->touche.push_back(std::make_pair(firstx + 1, firsty));
 					this->dejaJouer.push_back(std::make_pair(firstx + 1, firsty));
-					adv->setBoard(firstx + 1, firsty, 4); // TODO img croix rouge pour indiqué bateau touché
-
+					adv->setBoard(firstx + 1, firsty, 4);
 				}
 				else if (CheckPlace(firstx, firsty + 1, *adv) == 2 && !isIn(dejaJouer, firstx, firsty + 1))
 				{
 					this->touche.push_back(std::make_pair(firstx, firsty + 1));
 					this->dejaJouer.push_back(std::make_pair(firstx, firsty + 1));
-					adv->setBoard(firstx, firsty + 1, 4); // TODO img croix rouge pour indiqué bateau touché
-
+					adv->setBoard(firstx, firsty + 1, 4);
 				}
 				else if (CheckPlace(firstx - 1, firsty, *adv) == 2 && !isIn(dejaJouer, firstx - 1, firsty))
 				{
 					this->touche.push_back(std::make_pair(firstx - 1, firsty));
 					this->dejaJouer.push_back(std::make_pair(firstx - 1, firsty));
-					adv->setBoard(firstx - 1, firsty, 4); // TODO img croix rouge pour indiqué bateau touché
-
+					adv->setBoard(firstx - 1, firsty, 4);
 				}
 				else if (CheckPlace(firstx, firsty - 1, *adv) == 2 && !isIn(dejaJouer, firstx, firsty - 1))
 				{
 					this->touche.push_back(std::make_pair(firstx, firsty - 1));
 					this->dejaJouer.push_back(std::make_pair(firstx, firsty - 1));
-					adv->setBoard(firstx, firsty - 1, 4); // TODO img croix rouge pour indiqué bateau touché
+					adv->setBoard(firstx, firsty - 1, 4);
 				}
 				else {
 					this->strat = 1; // sinon le bateau a été entierement détruit deja, on repasse en mode chasse
@@ -455,10 +444,10 @@ void Joueur::ordiJoue(Board* adv)
 		break;
 
 		// fin ia difficile
-//-------------------------------------
+		//-------------------------------------
 
 	case 2: //ia moyen
-		//meme strat que l'ia difficile, mais ne peut eviter les rocher, et peut faire des erreur sur le bateau touche
+			//meme strat que l'ia difficile, mais ne peut eviter les rocher, et peut faire des erreur sur le bateau touche
 		switch (this->strat)
 		{
 		case 3:
@@ -479,18 +468,17 @@ void Joueur::ordiJoue(Board* adv)
 					this->touche.push_back(std::make_pair(x, y)); //si un bateau, ajouter au bateau touche
 					this->First.push_back(std::make_pair(x, y));
 					this->strat = 2; // on passe en mode traque afin de detruire le reste du bateau
-					adv->setBoard(x, y, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+					adv->setBoard(x, y, 4);
 				}
 				else
 				{
 					if (CheckPlace(x, y, *adv) == 1) {
 
 						this->strat = 3; // l'ordi a touché une pierre, il passe son tour au tour prochain
-						adv->setBoard(x, y, 5); // TODO img croix bleu
+						adv->setBoard(x, y, 5);
 					}
 					else {
-						adv->setBoard(x, y, 5); // TODO img croix bleu					}
+						adv->setBoard(x, y, 5);
 					}
 				}
 			}
@@ -511,18 +499,17 @@ void Joueur::ordiJoue(Board* adv)
 					this->touche.push_back(std::make_pair(x, y)); //si un bateau, ajouter au bateau touche
 					this->First.push_back(std::make_pair(x, y));
 					this->strat = 2; // on passe en mode traque afin de detruire le reste du bateau
-					adv->setBoard(x, y, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+					adv->setBoard(x, y, 4);
 				}
 				else
 				{
 					if (CheckPlace(x, y, *adv) == 1) {
 
 						this->strat = 3; // l'ordi a touché une pierre, il passe son tour au tour prochain
-						adv->setBoard(x, y, 5); // TODO img croix bleu
+						adv->setBoard(x, y, 5);
 					}
 					else {
-						adv->setBoard(x, y, 5); // TODO img croix bleu, al'eau
+						adv->setBoard(x, y, 5);
 					}
 				}
 
@@ -534,14 +521,14 @@ void Joueur::ordiJoue(Board* adv)
 				   //-------------------------------------------------
 		case 2: //debut traque
 
-			int lastx = this->touche.back().first;
-			int lasty = this->touche.back().second; // recupere les derniere coordonnées du bateau touché
-
+			std::pair<int, int> last = this->touche.back();
+			int lastx = last.first;
+			int lasty = last.second;
+			std::cout << lastx << " : " << lasty << std::endl;
 
 			if (neso == 0) {//seconde case donnant la direction
 				int aa = 0;
-				int lastx = this->touche.back().first;
-				int lasty = this->touche.back().second; // recupere les derniere coordonnées du bateau touché
+
 
 				if (CheckPlace(lastx + 1, lasty, *adv) != 3 && !isIn(dejaJouer, lastx + 1, lasty))   //cherche autour
 				{
@@ -550,15 +537,14 @@ void Joueur::ordiJoue(Board* adv)
 					if (aa == 2) {
 						neso = 1; // est
 						this->touche.push_back(std::make_pair(lastx + 1, lasty)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx + 1, lasty, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx + 1, lasty, 4);
 					}
 					else if (aa == 1) {
 						strat = 3;
 						adv->setBoard(lastx + 1, lasty, 5);
 					}
 					else {
-						adv->setBoard(lastx + 1, lasty, 5); // TODO img croix bleu					}
+						adv->setBoard(lastx + 1, lasty, 5);
 					}
 				}
 				else if (CheckPlace(lastx, lasty + 1, *adv) != 3 && !isIn(dejaJouer, lastx, lasty + 1))
@@ -568,14 +554,13 @@ void Joueur::ordiJoue(Board* adv)
 					if (aa == 2) {
 						neso = 3; // sud
 						this->touche.push_back(std::make_pair(lastx, lasty + 1)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx, lasty + 1, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx, lasty + 1, 4);
 					}
 					else if (aa == 1) {
 						strat = 3;
 					}
 					else {
-						adv->setBoard(lastx, lasty + 1, 5); // TODO img croix bleu					}
+						adv->setBoard(lastx, lasty + 1, 5);
 					}
 				}
 				else if (CheckPlace(lastx - 1, lasty, *adv) != 3 && !isIn(dejaJouer, lastx - 1, lasty))
@@ -585,14 +570,13 @@ void Joueur::ordiJoue(Board* adv)
 					if (aa == 2) {
 						neso = 4; // ouest
 						this->touche.push_back(std::make_pair(lastx - 1, lasty)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx - 1, lasty, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx - 1, lasty, 4);
 					}
 					else if (aa == 1) {
 						strat = 3;
 					}
 					else {
-						adv->setBoard(lastx - 1, lasty, 5); // TODO img croix bleu					}
+						adv->setBoard(lastx - 1, lasty, 5);
 					}
 				}
 				else if (CheckPlace(lastx, lasty - 1, *adv) != 3 && !isIn(dejaJouer, lastx, lasty - 1))
@@ -602,14 +586,13 @@ void Joueur::ordiJoue(Board* adv)
 					if (aa == 2) {
 						neso = 1; // nord
 						this->touche.push_back(std::make_pair(lastx, lasty - 1)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx, lasty - 1, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx, lasty - 1, 4);
 					}
 					else if (aa == 1) {
 						strat = 3;
 					}
 					else {
-						adv->setBoard(lastx, lasty - 1, 5); // TODO img croix bleu
+						adv->setBoard(lastx, lasty - 1, 5);
 					}
 				}
 				else { // bateau entierement detruit, pard en mode chasse
@@ -626,19 +609,16 @@ void Joueur::ordiJoue(Board* adv)
 					if (CheckPlace(lastx, lasty - 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty - 1)) {
 						this->touche.push_back(std::make_pair(lastx, lasty - 1)); //si un bateau, ajouter au bateau touche
 
-						adv->setBoard(lastx, lasty - 1, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx, lasty - 1, 4);
 					}
 					else {
 						if (CheckPlace(lastx, lasty - 1, *adv) == 1 && !isIn(dejaJouer, lastx, lasty - 1)) {
 							strat = 3;
-							adv->setBoard(lastx, lasty - 1, 5); // TODO img croix bleu
-							neso = 0;
+							adv->setBoard(lastx, lasty - 1, 5); 							neso = 0;
 
 						}
 						else {
-							adv->setBoard(lastx, lasty - 1, 5); // TODO img croix bleu
-							strat = 1;
+							adv->setBoard(lastx, lasty - 1, 5); 							strat = 1;
 							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
 						}
 					}
@@ -648,20 +628,17 @@ void Joueur::ordiJoue(Board* adv)
 
 					if (CheckPlace(lastx + 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx + 1, lasty)) {
 						this->touche.push_back(std::make_pair(lastx + 1, lasty)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx + 1, lasty, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx + 1, lasty, 4);
 					}
 					else {
 						if (CheckPlace(lastx + 1, lasty, *adv) == 1 && !isIn(dejaJouer, lastx + 1, lasty)) { // caillou
 							strat = 3;
-							adv->setBoard(lastx + 1, lasty, 5); // TODO img croix bleu
-							neso = 0;
+							adv->setBoard(lastx + 1, lasty, 5); 							neso = 0;
 						}
 						else {
 							// a l'eau
 							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-							adv->setBoard(lastx + 1, lasty, 5); // TODO img croix bleu
-							strat = 1;
+							adv->setBoard(lastx + 1, lasty, 5); 							strat = 1;
 						}
 					}
 					this->dejaJouer.push_back(std::make_pair(lastx + 1, lasty));
@@ -670,20 +647,17 @@ void Joueur::ordiJoue(Board* adv)
 
 					if (CheckPlace(lastx, lasty + 1, *adv) == 2 && !isIn(dejaJouer, lastx, lasty + 1)) {
 						this->touche.push_back(std::make_pair(lastx, lasty + 1)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx, lasty + 1, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx, lasty + 1, 4);
 					}
 					else {
 						if (CheckPlace(lastx, lasty + 1, *adv) == 1 && !isIn(dejaJouer, lastx, lasty + 1)) {
-							adv->setBoard(lastx, lasty + 1, 5); // TODO img croix bleu
-							strat = 3;
+							adv->setBoard(lastx, lasty + 1, 5); 							strat = 3;
 							neso = 0;
 						}
 						else {
 							// a l'eau
 							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-							adv->setBoard(lastx, lasty + 1, 5); // TODO img croix bleu
-							strat = 1;
+							adv->setBoard(lastx, lasty + 1, 5); 							strat = 1;
 						}
 					}
 					this->dejaJouer.push_back(std::make_pair(lastx, lasty + 1));
@@ -693,20 +667,17 @@ void Joueur::ordiJoue(Board* adv)
 
 					if (CheckPlace(lastx - 1, lasty, *adv) == 2 && !isIn(dejaJouer, lastx - 1, lasty)) {
 						this->touche.push_back(std::make_pair(lastx - 1, lasty)); //si un bateau, ajouter au bateau touche
-						adv->setBoard(lastx - 1, lasty, 4); // TODO img croix rouge pour indiqué bateau touché avec indice 4
-
+						adv->setBoard(lastx - 1, lasty, 4);
 					}
 					else {
 						if (CheckPlace(lastx - 1, lasty, *adv) == 1 && !isIn(dejaJouer, lastx - 1, lasty)) {
-							adv->setBoard(lastx - 1, lasty, 5); // TODO img croix bleu
-							strat = 3;
+							adv->setBoard(lastx - 1, lasty, 5); 							strat = 3;
 							neso = 0;
 						}
 						else {
 							// a l'eau
 							neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-							adv->setBoard(lastx - 1, lasty, 5); // TODO img croix bleu
-							strat = 1;
+							adv->setBoard(lastx - 1, lasty, 5); 							strat = 1;
 						}
 					}
 					this->dejaJouer.push_back(std::make_pair(lastx - 1, lasty));
@@ -718,7 +689,7 @@ void Joueur::ordiJoue(Board* adv)
 			std::cout << adv->getBoard(lastx, lasty) << std::endl;
 			std::cout << "x : " << x << "; y : " << y << std::endl;
 			std::cout << adv->getBoard(x, y) << std::endl;
-      */
+			*/
 
 			break; //fin traque
 
@@ -751,8 +722,7 @@ void Joueur::ordiJoue(Board* adv)
 			case 0:
 			default: // a l'eau
 				this->dejaJouer.push_back(std::make_pair(x, y));
-				adv->setBoard(x, y, 5); // TODO img croix bleu
-
+				adv->setBoard(x, y, 5);
 
 				break;
 			case 1: // un rocher
@@ -763,8 +733,7 @@ void Joueur::ordiJoue(Board* adv)
 				break;
 			case 2:
 				this->touche.push_back(std::make_pair(x, y)); //si un bateau, ajouter au bateau touche
-				adv->setBoard(x, y, 4); // TODO img croix rouge
-
+				adv->setBoard(x, y, 4);
 				break;
 			}
 
