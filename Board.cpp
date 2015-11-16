@@ -149,7 +149,7 @@ unsigned int width, unsigned int height)
         {
             // backup id at this moment for the tile
             int tileNumber = realCheckerboard[j][i];
-            cout << "tileNumber :" << tileNumber << " ";
+            //cout << "tileNumber :" << tileNumber << " ";
 
             // on en déduit sa position dans la texture du tileset
             int tu = tileNumber % (myTileset.getSize().x / tileSize.x);
