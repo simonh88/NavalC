@@ -113,7 +113,10 @@ bool Display::blitStaticText(sf::RenderWindow *window)
 {
     if (!font.loadFromFile("arial.ttf"))
         return false;
-
+    if (!textureBG.loadFromFile("img/Mer.png", sf::IntRect(0, 0, 800, 600)))
+        return false;
+    spriteBG.setTexture(textureBG);
+    window->draw(spriteBG);
     window->draw(setStaticText("You", 25, sf::Vector2u(170,10), true, false));
     window->draw(setStaticText("Computer", 25, sf::Vector2u(550,10), true, false));
     return true;

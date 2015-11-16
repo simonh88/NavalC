@@ -240,8 +240,8 @@ void Game::mainLoop(sf::RenderWindow *window)
 	}
 	//cout << "nombre de rochers : " << nbRock << endl;
 	window->clear(sf::Color::Black);
-	blitText.tailleComposants(window);
 	blitText.blitStaticText(window);
+	blitText.tailleComposants(window);
 	blitText.blitStatistics(window);
 	window->draw(moi.plat);
 	window->draw(tmp.plat);
