@@ -216,13 +216,14 @@ void Joueur::placeBateauIA(const std::vector<int> & tabOfBoat, int nbRock)   // 
 	int a;
 	int y, tabSize;
 	bool verticale;
-	//int nbBateau = 5; // 5 bateau de 2;3;3;4;5 case
-	//int tab[5] = { 2,3,3,4,5 };
 
 	std::vector<int> tab = tabOfBoat;
   tabSize = tab.size();
 
-	// boucle de 5 bateaux
+  /*for (int j = 0; j < nbRock; j++){
+
+  }*/
+
 	for (int i = 0; i < tabSize; i++)
 	{
 		a = rand() % 2;
