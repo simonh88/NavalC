@@ -126,7 +126,12 @@ bool Display::blitStaticText(sf::RenderWindow *window)
  */
 bool Display::textPlacementLoop(sf::RenderWindow *window)
 {
-    window->draw(setStaticText("Placez vos bateaux !", 30, sf::Vector2u(250,10), true, false));
+    if (!textureBG.loadFromFile("img/waiting.png", sf::IntRect(0, 0, 800, 600)))
+        return false;
+    spriteBG.setTexture(textureBG);
+    window->draw(spriteBG);
+    window->draw(setStaticText("A vos armes !", 30, sf::Vector2u(330,10), true, false));
+
     return true;
 }
 /*Affichage du texte et des sprites du StartMenu*/
