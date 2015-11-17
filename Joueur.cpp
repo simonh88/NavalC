@@ -180,7 +180,7 @@ bool Joueur::joueurJoue(Board *adv, Board *tmp, int x, int y) { // x, y les coor
 			if (y <= 29) cx = 0; // donne la case y dans le tableau adverse;
 
 			int a = CheckPlace(cx, cy, *adv);
-			std::cout << a;
+			
 			switch (a) {
 			case 0: // a l'eau
 				adv->setBoard(cx, cy, 5);
@@ -541,8 +541,7 @@ void Joueur::ordiJoue(Board* adv)
 
 			}
 
-			std::cout << "x : " << x << "; y : " << y << std::endl;
-			std::cout << adv->getBoard(x, y) << std::endl;
+
 			break; // fin chasse
 				   //-------------------------------------------------
 		case 2: //debut traque
@@ -550,7 +549,7 @@ void Joueur::ordiJoue(Board* adv)
 			std::pair<int, int> last = this->touche.back();
 			int lastx = last.first;
 			int lasty = last.second;
-			std::cout << lastx << " : " << lasty << std::endl;
+
 
 			if (neso == 0) {//seconde case donnant la direction
 				int aa = 0;

@@ -84,11 +84,6 @@ void Game::startMenu(sf::RenderWindow *window)
 				}
 			}
 			break;
-
-		case sf::Event::MouseButtonPressed:
-			cout << "position en x souris : " << event.mouseButton.x << endl;
-			cout << "position en y souris : " << event.mouseButton.y << endl;
-			break;
 			// on ne traite pas les autres types d'évènements
 		default:
 			break;
