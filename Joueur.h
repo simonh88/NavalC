@@ -31,6 +31,8 @@ class Joueur
 		bool estDansQuadrillage(int x, int y);
         Board plat;
 		int getIA();
+		int getNbEau();
+		int getNbCrash();
     protected:
     private:
         std::vector <int> row;
@@ -49,6 +51,8 @@ class Joueur
 		3= l'ordi a toucher un rocher au tour precedent il passe sont tour
 		*/
 		int neso; // Nord1, Sud2, Ouest3, Est4
+		int nbeau;
+		int nbcrash;
 };
 
 #endif // JOUEUR_H
