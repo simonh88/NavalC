@@ -194,6 +194,7 @@ void Game::placementLoop(sf::RenderWindow *window)
 	}
 	window->clear(sf::Color::Black);
 	blitText.textPlacementLoop(window);
+	blitText.flashingText(window);
 	//window->draw(tmp.plat);
 	window->display();
 }
