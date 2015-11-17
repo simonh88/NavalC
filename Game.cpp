@@ -226,20 +226,9 @@ void Game::mainLoop(sf::RenderWindow *window)
 			//res = moi.joueurJoue(ia.plat, tmp.plat, event.mouseButton.x, event.mouseButton.y);
 			bool res;
 			res = moi.joueurJoue(&ia.plat, &tmp.plat, event.mouseButton.x, event.mouseButton.y);
-			/*Si le joueur à tout détruit c'est fini */
-      if((ia.plat.getNbParts()) == 0){
-        finalMenu = true;
-        win = false;
-      }
-
 			if (res == true) {
 				turn += 1;
 				this->ia.ordiJoue(&moi.plat);
-				/*Si l'ia a tout détruit c'est fini */
-        if((moi.plat.getNbParts()) == 0){
-          finalMenu = true;
-        win = true;
-      }
 				//tmp.plat.printCheckerboard();
 				//ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
 				//this->ia.plat.printNbBateaux();
@@ -256,6 +245,17 @@ void Game::mainLoop(sf::RenderWindow *window)
 			break;
 		}
 	}
+				/*Si le joueur à tout détruit c'est fini */
+	if((ia.plat.getNbParts()) == 0){
+    finalMenu = true;
+    win = false;
+  }
+    /*Si l'ia a tout détruit c'est fini */
+  if((moi.plat.getNbParts()) == 0){
+    finalMenu = true;
+    win = true;
+  }
+
 	sTurn = intToString(turn);
 	//cout << "nombre de rochers : " << nbRock << endl;
 	window->clear(sf::Color::Black);
