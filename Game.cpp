@@ -289,6 +289,8 @@ void Game::finalLoop(sf::RenderWindow *window){
     }
   }
   window->clear(sf::Color::Black);
+  blitText.textFinalWindow(window, win);
+  blitText.flashingText(window);
   window->display();
 }
 /*Fonction gérant le déroulement de A à Z le jeu */

@@ -25,6 +25,7 @@ const std::string& sizeBoatIa, const std::string& nbBoatMoi, const std::string& 
 const std::string& nbWaterMoi, const std::string& nbWaterIa, const std::string& nbFireMoi,
 const std::string& nbFireIa, const std::string& nbTotMoi, const std::string& nbTotIa,
 const std::string& nbPartMoi, const std::string& nbPartIa);
+    bool textFinalWindow(sf::RenderWindow *window, bool win);
 
 private:
     sf::Font font;

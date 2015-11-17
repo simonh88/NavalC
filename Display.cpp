@@ -138,6 +138,16 @@ bool Display::textPlacementLoop(sf::RenderWindow *window)
 
     return true;
 }
+/*Affichage ecran final ! */
+bool Display::textFinalWindow(sf::RenderWindow *window, bool win){
+  if (!font.loadFromFile("arial.ttf"))
+        return false;
+  if (win)
+    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(10,400), true, false));
+  else
+    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(10,400), true, false));
+  return true;
+}
 /*Affichage du texte et des sprites du StartMenu*/
 bool Display::StartMenuAndDifficulty(sf::RenderWindow *window, int pos, bool isStartMenu)
 {
