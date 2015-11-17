@@ -141,11 +141,15 @@ bool Display::textPlacementLoop(sf::RenderWindow *window)
 /*Affichage ecran final ! */
 bool Display::textFinalWindow(sf::RenderWindow *window, bool win){
   if (!font.loadFromFile("arial.ttf"))
-        return false;
+    return false;
+  if (!textureBG.loadFromFile("img/final.png", sf::IntRect(0, 0, 800, 600)))
+    return false;
+  spriteBG.setTexture(textureBG);
+  window->draw(spriteBG);
   if (win)
-    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(10,300), true, false));
+    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(100,300), true, false));
   else
-    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(10,300), true, false));
+    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(100,300), true, false));
   return true;
 }
 /*Affichage du texte et des sprites du StartMenu*/
