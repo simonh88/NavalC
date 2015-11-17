@@ -287,6 +287,7 @@ void Game::finalLoop(sf::RenderWindow *window){
       {
         finalMenu = false;
         continuingStartMenu = true;
+        aEnvieDeContinuer = true;
       }
     default:
 			break;

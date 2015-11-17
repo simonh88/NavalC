@@ -18,18 +18,21 @@ using namespace std;
 
 int main()
 {
-    //int static NBBOAT = -1; // Si -1 c'est que on récup ce qu'il y a dans la save.
     sf::RenderWindow window(sf::VideoMode(800, 600), "NavalBattle");
     window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(30);
     srand(time(NULL));
+    static bool aEnvieDeContinuer(false);
 
     Game partie;
 
     while (window.isOpen()) // Boucle principal
     {
-        partie.generalLoop(&window);
+      if(aEnvieDeContinuer){
+        partie = new Game();
+        aEnvieDeContinuer = false;
+      }
+      partie.generalLoop(&window);
     }
-    cout << endl;
     return 0;
 }
