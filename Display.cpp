@@ -147,9 +147,9 @@ bool Display::textFinalWindow(sf::RenderWindow *window, bool win){
   spriteBG.setTexture(textureBG);
   window->draw(spriteBG);
   if (!win)
-    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(100,300), true, false));
+    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(100,150), true, false));
   else
-    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(100,300), true, false));
+    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(100,150), true, false));
   return true;
 }
 /*Affichage du texte et des sprites du StartMenu*/
