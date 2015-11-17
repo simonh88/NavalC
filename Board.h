@@ -22,7 +22,8 @@ class Board : public sf::Drawable, public sf::Transformable
         std::vector<int> nbBateaux(std::vector<std::vector<int> > checkerBoard);
         void printNbBateaux();
         void printBateaux(std::vector<int> bateaux);
-
+        std::string sBateaux(std::vector<int> bateaux);
+        std::string intToString (int a);
     private:
         std::vector<std::vector<int> > realCheckerboard;
         int nbBoat;

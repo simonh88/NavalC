@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -35,6 +36,14 @@ std::vector<std::vector<int> > Board::newBoard()
     //cout << endl << "NewBoard : " << myNewBoard[1][1] << endl;
     return myNewBoard;
 }
+/*Fonction permettant de convertir un int en string*/
+std::string Board::intToString (int a)
+{
+    std::ostringstream temp;
+    temp<<a;
+    return temp.str();
+}
+
 /*Affichage console du checkerboard
  * Pour debugage
  */
@@ -66,8 +75,21 @@ void Board::printBateaux(std::vector<int> bateaux)
         if (i != sizetab-1)
             cout << ", ";
     }
-    cout << " }";
+    cout << "}";
 }
+std::string Board::sBateaux(std::vector<int> bateaux){
+  std::string rep;
+  int sizetab;
+  sizetab = bateaux.size();
+  rep += "{";
+  for (int i = 0; i<sizetab; i++){
+    rep += intToString(bateaux[i]);
+    if(i != sizetab-1) rep += ", ";
+  }
+  rep += " }";
+  return rep;
+}
+
 /*Affichage du nombre de bateaux
  * pour debug
  */

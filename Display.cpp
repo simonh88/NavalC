@@ -60,11 +60,12 @@ void Display::tailleComposants(sf:: RenderWindow *window)
     window->draw(plat2);
 }
 /*Affichage de nombreuses stats */
-void Display::blitStatistics(sf::RenderWindow *window, const std::string& turn)
+void Display::blitStatistics(sf::RenderWindow *window, const std::string& turn,const  std::string& sizeBoatMoi,
+ const std::string& sizeBoatIa)
 {
   /* COMPUTER */
   window->draw(setStaticText("Boat alive                    :    " , 23, sf::Vector2u(410,400), false, false));
-  window->draw(setStaticText("Size of boat alive        :    ", 23, sf::Vector2u(410,425), false, false));
+  window->draw(setStaticText("Size of boat alive        :    " + sizeBoatIa, 23, sf::Vector2u(410,425), false, false));
   window->draw(setStaticText("Number of parts alive :    ", 23, sf::Vector2u(410,450), false, false));
   window->draw(setStaticText("Number of turns          :    " + turn, 23, sf::Vector2u(410,480), false, false));
   window->draw(setStaticText("Number of water hit    :    ", 23, sf::Vector2u(410,510), false, false));
@@ -72,7 +73,7 @@ void Display::blitStatistics(sf::RenderWindow *window, const std::string& turn)
   window->draw(setStaticText("Total hit                        :    ", 23, sf::Vector2u(410,568), false, false));
   /* PLAYER */
   window->draw(setStaticText("Boat alive                    :    " , 23, sf::Vector2u(10,400), false, false));
-  window->draw(setStaticText("Size of boat alive        :    ", 23, sf::Vector2u(10,425), false, false));
+  window->draw(setStaticText("Size of boat alive        :    " + sizeBoatMoi, 23, sf::Vector2u(10,425), false, false));
   window->draw(setStaticText("Number of parts alive :    ", 23, sf::Vector2u(10,450), false, false));
   window->draw(setStaticText("Number of turns          :    " + turn, 23, sf::Vector2u(10,480), false, false));
   window->draw(setStaticText("Number of water hit    :    ", 23, sf::Vector2u(10,510), false, false));

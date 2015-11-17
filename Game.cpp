@@ -223,7 +223,7 @@ void Game::mainLoop(sf::RenderWindow *window)
 		case sf::Event::MouseButtonPressed:
 			cout << "position en x souris : " << event.mouseButton.x << endl;
 			cout << "position en y souris : " << event.mouseButton.y << endl;
-
+			cout << moi.plat.sBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard())) << endl;
 			//res = moi.joueurJoue(ia.plat, tmp.plat, event.mouseButton.x, event.mouseButton.y);
 			bool res;
 			res = moi.joueurJoue(&ia.plat, &tmp.plat, event.mouseButton.x, event.mouseButton.y);
@@ -253,7 +253,8 @@ void Game::mainLoop(sf::RenderWindow *window)
 	window->clear(sf::Color::Black);
 	blitText.blitStaticText(window);
 	blitText.tailleComposants(window);
-	blitText.blitStatistics(window, sTurn);
+	blitText.blitStatistics(window, sTurn, moi.plat.sBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard())),
+	ia.plat.sBateaux(ia.plat.nbBateaux(ia.plat.getCheckerboard())));
 	window->draw(moi.plat);
 	window->draw(tmp.plat);
 	//window->draw(ia.plat);

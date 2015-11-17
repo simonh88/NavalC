@@ -20,7 +20,7 @@ public:
     bool flashingText(sf::RenderWindow *window);
     void opacitychange();
     bool textPlacementLoop(sf::RenderWindow *window);
-    void blitStatistics(sf::RenderWindow *window, const std::string& turn);
+    void blitStatistics(sf::RenderWindow *window, const std::string& turn, const std::string& sizeBoatMoi, const std::string& sizeBoatIa);
 
 private:
     sf::Font font;
