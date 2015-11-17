@@ -633,10 +633,15 @@ void Joueur::ordiJoue(Board* adv)
 								adv->setBoard(lastx, lasty - 1, 5); 							neso = 0;
 
 							}
-							else {
-								adv->setBoard(lastx, lasty - 1, 5); 							strat = 1;
-								neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-								if (CheckPlace(lastx, lasty - 1, *adv) == 4)adv->setBoard(lastx, lasty - 1, 4);
+							else {								
+								strat = 1;
+								neso = 0;
+								if (isIn(dejaJouer, lastx, lasty - 1)) {
+									this->ordiJoue(adv);
+								}
+								else {
+									adv->setBoard(lastx, lasty - 1, 5);
+								}
 							}
 						}
 						this->dejaJouer.push_back(std::make_pair(lastx, lasty - 1));
@@ -653,11 +658,13 @@ void Joueur::ordiJoue(Board* adv)
 								adv->setBoard(lastx + 1, lasty, 5); 							neso = 0;
 							}
 							else {
-								// a l'eau
-								neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-								adv->setBoard(lastx + 1, lasty, 5); 							strat = 1;
-								if (CheckPlace(lastx + 1, lasty, *adv) == 4) {
-									adv->setBoard(lastx + 1, lasty, 4);
+								strat = 1;
+								neso = 0;
+								if (isIn(dejaJouer, lastx + 1, lasty)) {
+									this->ordiJoue(adv);
+								}
+								else {
+									adv->setBoard(lastx + 1, lasty, 5);
 								}
 
 
@@ -677,10 +684,14 @@ void Joueur::ordiJoue(Board* adv)
 								neso = 0;
 							}
 							else {
-								// a l'eau
+								strat = 1;
 								neso = 0;
-								adv->setBoard(lastx, lasty + 1, 5); 							strat = 1;
-								if (CheckPlace(lastx, lasty + 1, *adv) == 4)adv->setBoard(lastx, lasty + 1, 4);
+								if (isIn(dejaJouer, lastx, lasty + 1)) {
+									this->ordiJoue(adv);
+								}
+								else {
+									adv->setBoard(lastx, lasty + 1, 5);
+								}
 							}
 						}
 						this->dejaJouer.push_back(std::make_pair(lastx, lasty + 1));
@@ -698,10 +709,14 @@ void Joueur::ordiJoue(Board* adv)
 								neso = 0;
 							}
 							else {
-								// a l'eau
-								neso = 0; // on a atteind un bout du bateau, on test l'autre bout
-								adv->setBoard(lastx - 1, lasty, 5); 							strat = 1;
-								if (CheckPlace(lastx - 1, lasty, *adv) == 4)adv->setBoard(lastx - 1, lasty, 4);
+								strat = 1;
+								neso = 0;
+								if (isIn(dejaJouer, lastx -1, lasty)) {
+									this->ordiJoue(adv);
+								}
+								else {
+									adv->setBoard(lastx - 1, lasty, 5);
+								}
 							}
 						}
 						this->dejaJouer.push_back(std::make_pair(lastx - 1, lasty));
