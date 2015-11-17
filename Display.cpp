@@ -143,9 +143,9 @@ bool Display::textFinalWindow(sf::RenderWindow *window, bool win){
   if (!font.loadFromFile("arial.ttf"))
         return false;
   if (win)
-    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(10,400), true, false));
+    window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(10,300), true, false));
   else
-    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(10,400), true, false));
+    window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(10,300), true, false));
   return true;
 }
 /*Affichage du texte et des sprites du StartMenu*/

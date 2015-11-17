@@ -204,14 +204,7 @@ void Game::mainLoop(sf::RenderWindow *window)
 	while (window->pollEvent(event))
 	{
 		// évènement "fermeture demandée" : on ferme la fenêtre
-    if((ia.plat.getNbParts()) == 0){
-      finalMenu = true;
-      win = true;
-    }
-    if((moi.plat.getNbParts()) == 0){
-      finalMenu = true;
-      win = false;
-    }
+
 		switch (event.type)
 		{
 			// fenêtre fermée
@@ -225,17 +218,27 @@ void Game::mainLoop(sf::RenderWindow *window)
 			break;
 
 		case sf::Event::MouseButtonPressed:
-			cout << "position en x souris : " << event.mouseButton.x << endl;
+			/*cout << "position en x souris : " << event.mouseButton.x << endl;
 			cout << "position en y souris : " << event.mouseButton.y << endl;
-			cout << moi.plat.sBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard())) << endl;
+      cout << moi.plat.sBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard())) << endl;
+			*/
 			//res = moi.joueurJoue(ia.plat, tmp.plat, event.mouseButton.x, event.mouseButton.y);
 			bool res;
 			res = moi.joueurJoue(&ia.plat, &tmp.plat, event.mouseButton.x, event.mouseButton.y);
+			/*Si le joueur à tout détruit c'est fini */
+      if((ia.plat.getNbParts()) == 0){
+        finalMenu = true;
+        win = false;
+      }
 
 			if (res == true) {
 				turn += 1;
-
 				this->ia.ordiJoue(&moi.plat);
+				/*Si l'ia a tout détruit c'est fini */
+        if((moi.plat.getNbParts()) == 0){
+          finalMenu = true;
+        win = true;
+      }
 				//tmp.plat.printCheckerboard();
 				//ia.plat.printBateaux(this->ia.plat.nbBateaux(this->ia.plat.getCheckerboard()));
 				//this->ia.plat.printNbBateaux();
