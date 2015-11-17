@@ -15,6 +15,7 @@
 #include "Game.h"
 
 using namespace std;
+bool Game::aEnvieDeContinuer = false;
 
 int main()
 {
@@ -22,15 +23,15 @@ int main()
     window.setKeyRepeatEnabled(false);
     window.setFramerateLimit(30);
     srand(time(NULL));
-    static bool aEnvieDeContinuer(false);
+
 
     Game partie;
 
     while (window.isOpen()) // Boucle principal
     {
-      if(aEnvieDeContinuer){
-        partie = new Game();
-        aEnvieDeContinuer = false;
+      if(Game::aEnvieDeContinuer){
+        partie = Game();
+        Game::aEnvieDeContinuer = false;
       }
       partie.generalLoop(&window);
     }

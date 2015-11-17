@@ -25,6 +25,7 @@ class Game
         void difficultyLoop(sf::RenderWindow *window);
         void finalLoop(sf::RenderWindow *window);
         std::string intToString (int a);
+        static bool aEnvieDeContinuer;
     protected:
     private:
         sf::Event event;
@@ -44,6 +45,7 @@ class Game
         bool finalMenu;
         bool win;
         int turn;
+
 
 };
 
