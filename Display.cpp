@@ -146,7 +146,7 @@ bool Display::textFinalWindow(sf::RenderWindow *window, bool win){
     return false;
   spriteBG.setTexture(textureBG);
   window->draw(spriteBG);
-  if (win)
+  if (!win)
     window->draw(setStaticText("YOU WIN !!!", 100, sf::Vector2u(100,300), true, false));
   else
     window->draw(setStaticText("YOU LOOSE ...", 100, sf::Vector2u(100,300), true, false));
