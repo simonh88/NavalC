@@ -21,7 +21,9 @@ public:
     void opacitychange();
     bool textPlacementLoop(sf::RenderWindow *window);
     void blitStatistics(sf::RenderWindow *window, const std::string& turn, const std::string& sizeBoatMoi,
-const std::string& sizeBoatIa, const std::string& nbBoatMoi, const std::string& nbBoatIa);
+const std::string& sizeBoatIa, const std::string& nbBoatMoi, const std::string& nbBoatIa,
+const std::string& nbWaterMoi, const std::string& nbWaterIa, const std::string& nbFireMoi,
+const std::string& nbFireIa, const std::string& nbTotMoi, const std::string& nbTotIa);
 
 private:
     sf::Font font;
