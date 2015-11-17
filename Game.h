@@ -23,6 +23,7 @@ class Game
         void generalLoop(sf::RenderWindow *window);
         void placementLoop(sf::RenderWindow *window);
         void difficultyLoop(sf::RenderWindow *window);
+        void finalLoop(sf::RenderWindow *window);
         std::string intToString (int a);
     protected:
     private:
@@ -40,6 +41,8 @@ class Game
         bool continuingStartMenu;  //Permet de savoir si on a besoin d'afficher le startmenu
         bool placementMenu;  // Permet de savoir si on a besoin d'afficher le placementMenu
         bool difficultyMenu;
+        bool finalMenu;
+        bool win;
         int turn;
 
 };

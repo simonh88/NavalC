@@ -19,6 +19,10 @@ Board::~Board()
 {
     //dtor
 }
+
+int Board::getNbParts(){
+  return nbParts;
+}
 /*Getteur du checkerboard */
 std::vector<std::vector<int> > Board::getCheckerboard()
 {
@@ -97,6 +101,7 @@ std::string Board::sNbParts(std::vector<int> bateaux){
   for (int i = 0; i<sizetab; i++){
     rep += bateaux[i];
   }
+  nbParts = rep;
   return intToString(rep);
 }
 

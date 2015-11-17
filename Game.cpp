@@ -7,7 +7,7 @@ using std::endl;
 
 
 /*Constructeur utilisant la surcharge pour init pos et les deux booleens */
-Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false), difficultyMenu(false), turn(0)
+Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false), difficultyMenu(false),finalMenu(false), turn(0)
 {
 	maRecup.fillCheckerboard("config.txt");
 	nbRock = maRecup.getNbRock();
@@ -204,10 +204,14 @@ void Game::mainLoop(sf::RenderWindow *window)
 	while (window->pollEvent(event))
 	{
 		// évènement "fermeture demandée" : on ferme la fenêtre
-		/*if (event.type == sf::Event::Closed)
-			window.close();
-		if (event.type == sf::Event::)
-		*/
+    if((ia.plat.getNbParts()) == 0){
+      finalMenu = true;
+      win = true;
+    }
+    if((moi.plat.getNbParts()) == 0){
+      finalMenu = true;
+      win = false;
+    }
 		switch (event.type)
 		{
 			// fenêtre fermée
@@ -264,6 +268,29 @@ void Game::mainLoop(sf::RenderWindow *window)
 	//window->draw(ia.plat);
 	window->display();
 }
+/*Fonction ecran Final, propose de recommencer ou de quitter avec echappe*/
+void Game::finalLoop(sf::RenderWindow *window){
+  while (window->pollEvent(event))
+	{
+		switch (event.type)
+		{
+			// fenêtre fermée
+		case sf::Event::Closed:
+			window->close();
+			break;
+    case sf::Event::KeyPressed:
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))//"Enter"
+      {
+        finalMenu = false;
+        continuingStartMenu = true;
+      }
+    default:
+			break;
+    }
+  }
+  window->clear(sf::Color::Black);
+  window->display();
+}
 /*Fonction gérant le déroulement de A à Z le jeu */
 void Game::generalLoop(sf::RenderWindow *window)
 {
@@ -274,6 +301,8 @@ void Game::generalLoop(sf::RenderWindow *window)
 		placementLoop(window);
 	else if (difficultyMenu)
     difficultyLoop(window);
+  else if (finalMenu)
+    finalLoop(window);
   else
 		mainLoop(window);
 }

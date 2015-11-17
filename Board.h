@@ -25,8 +25,10 @@ class Board : public sf::Drawable, public sf::Transformable
         std::string sBateaux(std::vector<int> bateaux);
         std::string intToString (int a);
         std::string sNbParts(std::vector<int> bateaux);
+        int getNbParts();
     private:
         std::vector<std::vector<int> > realCheckerboard;
+        int nbParts;
         int nbBoat;
         sf::VertexArray vertices;
         sf::Texture myTileset;
