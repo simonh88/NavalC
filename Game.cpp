@@ -244,17 +244,17 @@ void Game::mainLoop(sf::RenderWindow *window)
 		default:
 			break;
 		}
+    /*Si le joueur à tout détruit c'est fini */
+    if((ia.plat.getNbParts()) == 0){
+      finalMenu = true;
+      win = false;
+    }
+      /*Si l'ia a tout détruit c'est fini */
+    if((moi.plat.getNbParts()) == 0){
+      finalMenu = true;
+      win = true;
+    }
 	}
-				/*Si le joueur à tout détruit c'est fini */
-	if((ia.plat.getNbParts()) == 0){
-    finalMenu = true;
-    win = false;
-  }
-    /*Si l'ia a tout détruit c'est fini */
-  if((moi.plat.getNbParts()) == 0){
-    finalMenu = true;
-    win = true;
-  }
 
 	sTurn = intToString(turn);
 	//cout << "nombre de rochers : " << nbRock << endl;
