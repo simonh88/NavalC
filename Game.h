@@ -23,6 +23,7 @@ class Game
         void generalLoop(sf::RenderWindow *window);
         void placementLoop(sf::RenderWindow *window);
         void difficultyLoop(sf::RenderWindow *window);
+        std::string intToString (int a);
     protected:
     private:
         sf::Event event;

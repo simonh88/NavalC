@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <sstream>
 
 
 using std::cout;
@@ -30,6 +31,13 @@ Game::Game() : pos(0), continuingStartMenu(true), placementMenu(false), difficul
 Game::~Game()
 {
 	//dtor
+}
+/*Fonction permettant de convertir un int en string*/
+std::string Game::intToString (int a)
+{
+    std::ostringstream temp;
+    temp<<a;
+    return temp.str();
 }
 
 /*Fonction gerant le menu de start */
@@ -192,6 +200,7 @@ void Game::placementLoop(sf::RenderWindow *window)
 /*Fonction gérant l'affichage du déroulement de la partie */
 void Game::mainLoop(sf::RenderWindow *window)
 {
+  std::string sTurn;
 	while (window->pollEvent(event))
 	{
 		// évènement "fermeture demandée" : on ferme la fenêtre
@@ -239,11 +248,12 @@ void Game::mainLoop(sf::RenderWindow *window)
 			break;
 		}
 	}
+	sTurn = intToString(turn);
 	//cout << "nombre de rochers : " << nbRock << endl;
 	window->clear(sf::Color::Black);
 	blitText.blitStaticText(window);
 	blitText.tailleComposants(window);
-	blitText.blitStatistics(window);
+	blitText.blitStatistics(window, sTurn);
 	window->draw(moi.plat);
 	window->draw(tmp.plat);
 	//window->draw(ia.plat);
