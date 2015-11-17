@@ -90,6 +90,16 @@ std::string Board::sBateaux(std::vector<int> bateaux){
   return rep;
 }
 
+std::string Board::sNbParts(std::vector<int> bateaux){
+  int rep, sizetab;
+  rep = 0;
+  sizetab = bateaux.size();
+  for (int i = 0; i<sizetab; i++){
+    rep += bateaux[i];
+  }
+  return intToString(rep);
+}
+
 /*Affichage du nombre de bateaux
  * pour debug
  */

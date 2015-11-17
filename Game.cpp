@@ -257,7 +257,8 @@ void Game::mainLoop(sf::RenderWindow *window)
 	ia.plat.sBateaux(ia.plat.nbBateaux(ia.plat.getCheckerboard())), moi.plat.printNbBateaux(),
   ia.plat.printNbBateaux(), intToString(moi.getNbEau()), intToString(ia.getNbEau()),
   intToString(moi.getNbCrash()), intToString(ia.getNbCrash()), intToString(moi.getNbEau()+moi.getNbCrash()),
-  intToString(ia.getNbEau()+ia.getNbCrash()));
+  intToString(ia.getNbEau()+ia.getNbCrash()), moi.plat.sNbParts(moi.plat.nbBateaux(moi.plat.getCheckerboard())),
+  ia.plat.sNbParts(ia.plat.nbBateaux(ia.plat.getCheckerboard())));
 	window->draw(moi.plat);
 	window->draw(tmp.plat);
 	//window->draw(ia.plat);

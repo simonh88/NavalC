@@ -63,12 +63,13 @@ void Display::tailleComposants(sf:: RenderWindow *window)
 void Display::blitStatistics(sf::RenderWindow *window, const std::string& turn,const  std::string& sizeBoatMoi,
  const std::string& sizeBoatIa, const std::string& nbBoatMoi, const std::string& nbBoatIa,
  const std::string& nbWaterMoi, const std::string& nbWaterIa, const std::string& nbFireMoi,
-const std::string& nbFireIa, const std::string& nbTotMoi, const std::string& nbTotIa)
+const std::string& nbFireIa, const std::string& nbTotMoi, const std::string& nbTotIa,
+const std::string& nbPartMoi, const std::string& nbPartIa)
 {
   /* COMPUTER */
   window->draw(setStaticText("Boat alive                    :    " + nbBoatIa, 23, sf::Vector2u(410,400), false, false));
   window->draw(setStaticText("Size of boat alive        :    " + sizeBoatIa, 23, sf::Vector2u(410,425), false, false));
-  window->draw(setStaticText("Number of parts alive :    ", 23, sf::Vector2u(410,450), false, false));
+  window->draw(setStaticText("Number of parts alive :    " + nbPartIa, 23, sf::Vector2u(410,450), false, false));
   window->draw(setStaticText("Number of turns          :    " + turn, 23, sf::Vector2u(410,480), false, false));
   window->draw(setStaticText("Number of water hit    :    " + nbWaterIa, 23, sf::Vector2u(410,510), false, false));
   window->draw(setStaticText("Number of boat hit      :    " + nbFireIa, 23, sf::Vector2u(410,540), false, false));
@@ -76,7 +77,7 @@ const std::string& nbFireIa, const std::string& nbTotMoi, const std::string& nbT
   /* PLAYER */
   window->draw(setStaticText("Boat alive                    :    " + nbBoatMoi, 23, sf::Vector2u(10,400), false, false));
   window->draw(setStaticText("Size of boat alive        :    " + sizeBoatMoi, 23, sf::Vector2u(10,425), false, false));
-  window->draw(setStaticText("Number of parts alive :    ", 23, sf::Vector2u(10,450), false, false));
+  window->draw(setStaticText("Number of parts alive :    " + nbPartMoi, 23, sf::Vector2u(10,450), false, false));
   window->draw(setStaticText("Number of turns          :    " + turn, 23, sf::Vector2u(10,480), false, false));
   window->draw(setStaticText("Number of water hit    :    " + nbWaterMoi, 23, sf::Vector2u(10,510), false, false));
   window->draw(setStaticText("Number of boat hit      :    " + nbFireMoi, 23, sf::Vector2u(10,540), false, false));
