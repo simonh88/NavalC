@@ -93,9 +93,10 @@ std::string Board::sBateaux(std::vector<int> bateaux){
 /*Affichage du nombre de bateaux
  * pour debug
  */
-void Board::printNbBateaux()
+std::string Board::printNbBateaux()
 {
-    cout << "Nombre de bateaux : " << nbBoat << endl;
+    // ce sera actualiser a chaque comptage de bateaux.
+    return intToString(nbBoat);
 }
 /* Comptage du nombre de bateaux d'un board
  * Return un tableau contenant les tailles des bateaux(vector)

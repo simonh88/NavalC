@@ -254,7 +254,8 @@ void Game::mainLoop(sf::RenderWindow *window)
 	blitText.blitStaticText(window);
 	blitText.tailleComposants(window);
 	blitText.blitStatistics(window, sTurn, moi.plat.sBateaux(moi.plat.nbBateaux(moi.plat.getCheckerboard())),
-	ia.plat.sBateaux(ia.plat.nbBateaux(ia.plat.getCheckerboard())));
+	ia.plat.sBateaux(ia.plat.nbBateaux(ia.plat.getCheckerboard())), moi.plat.printNbBateaux(),
+  ia.plat.printNbBateaux());
 	window->draw(moi.plat);
 	window->draw(tmp.plat);
 	//window->draw(ia.plat);
