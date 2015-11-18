@@ -27,6 +27,8 @@ Lors du lancement d'une partie le Joueur peut lancer directement le jeu, ou choi
     *moyen : l'ordinateur se comporte comme un humain mais peux commetre des erreurs
     *difficile : l'ordinateur est invincible et ne commet aucune erreur
 
+Lorsqu'une partie est en cours, il est possible de revenir au menu principale, et de recommencer une nouvelle partie avec la touche 'R'.
+
 Une fois la difficulté choisie et la partie démarré, le joueur se sert de la souris pour cliquer sur le plateau ennemis pour trouver/chercher ses bateaux. Si le joueur ou l'ordinateur tombe sur un rocher, il ne jouera pas au prochain tour.
 
 Le premier à avoir éliminé tous les bateaux de l'adversaire gagne la partie.
