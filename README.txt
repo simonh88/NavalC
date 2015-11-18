@@ -1,4 +1,4 @@
-groupe 4 - bataille navale
+﻿groupe 4 - bataille navale
 LEFEBVRE Tristan
 HAJEK Simon
 
@@ -15,10 +15,10 @@ Le fichier contient un tableau de caractère, representant le plateau de jeu de 
     0 : case vide.
     1 : un rocher.
     ^ : case du haut d'un bateau vertical (1 par bateau)
-    | : case du milieu d'un bateau vertical ( 1 ou plus par bateau)
-    v : case du bas d'un bateau vertical (1 par bateau)
+    | : case du milieu d'un bateau vertical ( 0 ou plus par bateau)
+    v : case du bas d'un bateau vertical (0 par bateau)
     < : case de gauche d'un  bateau horizontal (1 par bateau)
-    = : case du milieu d'un bateau horizontal (1 ou plus par bateau)
+    = : case du milieu d'un bateau horizontal (0 ou plus par bateau)
     > : case de droite d'un bateau horizontal (1 par bateau)
 Quelque soit le nombre de bateau, ainsi que le nombre de rocher, l'ordinateur aura le même nombre, afin de ne pas créer d'inégalité.
 
