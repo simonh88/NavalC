@@ -68,7 +68,7 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
         do
         {
             tmp = readAChar(fileName.c_str(), currentPos);
-            cout << tmp << endl;
+            //cout << tmp << endl;
             fichier_mal_ecrit_voir_readme = (tmp == '#' || tmp == '0' ||tmp == '1' || tmp == '=' ||
             tmp == '^' || tmp == 'v' || tmp == '|' || tmp == '<' || tmp == '>' || tmp == ' ' || tmp == '\n');
             assert(fichier_mal_ecrit_voir_readme);
