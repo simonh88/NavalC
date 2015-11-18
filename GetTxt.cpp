@@ -56,6 +56,7 @@ void GetTxt::Test()
 }
 void GetTxt::fillCheckerboard(const std::string & fileName)
 {
+
     bool fichier_mal_ecrit_voir_readme;
     char tmp;
     int currentPos(0);
