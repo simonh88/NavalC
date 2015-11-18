@@ -1,5 +1,5 @@
 #include "GetTxt.h"
-
+#include <cassert>
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -56,6 +56,7 @@ void GetTxt::Test()
 }
 void GetTxt::fillCheckerboard(const std::string & fileName)
 {
+    bool fichier_mal_ecrit_voir_readme;
     char tmp;
     int currentPos(0);
     bool flag(false);
@@ -66,7 +67,9 @@ void GetTxt::fillCheckerboard(const std::string & fileName)
         do
         {
             tmp = readAChar(fileName.c_str(), currentPos);
-			
+            fichier_mal_ecrit_voir_readme = (tmp == '#' || tmp == '0' ||tmp == '1' || tmp == '=' ||
+            tmp == '^' || tmp == 'v' || tmp == '|' || tmp == '<' || tmp == '>');
+            assert(fichier_mal_ecrit_voir_readme);
             if (tmp == '#')
             {
                 //cout << "Pas intéressant" << endl;

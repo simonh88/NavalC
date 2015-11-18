@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <cassert>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
