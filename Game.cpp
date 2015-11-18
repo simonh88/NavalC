@@ -210,7 +210,10 @@ void Game::mainLoop(sf::RenderWindow *window)
 
 			// touche pressée
 		case sf::Event::KeyPressed:
-			//...
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
+        continuingStartMenu = true;
+        Game::aEnvieDeContinuer = true;
+			}
 			break;
 
 		case sf::Event::MouseButtonPressed:
